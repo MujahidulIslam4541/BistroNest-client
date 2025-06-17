@@ -1,10 +1,15 @@
 import React from 'react'
+import { FaUserCircle } from 'react-icons/fa'
+import { FaCartPlus } from 'react-icons/fa6'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
 
     const navItem = <>
-        <li><a>Item 1</a></li>
-        <li><a>Item 3</a></li>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/Contact Us'>Contact Us</Link></li>
+        <li><Link to='/menu'>Our Menu</Link></li>
+        <li><Link to='/shope'>Our Shope</Link></li>
     </>
     return (
         <div>
@@ -16,21 +21,36 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-black/30  rounded-box z-1 mt-3 w-52 p-2 shadow">
                             {navItem}
                         </ul>
                     </div>
                     <a className="btn btn-ghost text-xl">BISTRO NEST
-                       
+
                     </a>
                 </div>
-                <div className="navbar-center hidden lg:flex">
+                <div className="navbar-center hidden  lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         {navItem}
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <a className="btn">Button</a>
+                <div className="navbar-end space-x-4 items-center">
+                    {/* Cart Icon */}
+                    <div className="relative">
+                        <FaCartPlus className="text-2xl text-white hover:text-yellow-400 cursor-pointer" />
+                        {/* Optional badge */}
+                        {/* <span className="absolute top-0 right-0 text-xs bg-red-500 text-white px-1 rounded-full">3</span> */}
+                    </div>
+
+                    {/* Sign In Button */}
+                    <Link to="/signIn">
+                        <button className="px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md text-black font-medium">
+                            Sign In
+                        </button>
+                    </Link>
+
+                    {/* User Icon */}
+                    <FaUserCircle className="text-3xl text-white hover:text-yellow-400 cursor-pointer" />
                 </div>
             </div>
         </div>
