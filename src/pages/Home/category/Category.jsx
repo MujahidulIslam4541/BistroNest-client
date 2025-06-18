@@ -17,13 +17,23 @@ const Category = () => {
     return (
         <section>
 
-<SectionTitle subHeading={'From 11:00am to 10:00pm'} heading={'order online'}></SectionTitle>
+            <SectionTitle subHeading={'From 11:00am to 10:00pm'} heading={'order online'}></SectionTitle>
 
             <Swiper
-                slidesPerView={4}
-                spaceBetween={5}
+                spaceBetween={10}
                 pagination={{
                     clickable: true,
+                }}
+                breakpoints={{
+                    0: {
+                        slidesPerView: 2,
+                    },
+                    768: {
+                        slidesPerView: 3,
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                    },
                 }}
                 modules={[Pagination]}
                 className="mySwiper mb-24"
@@ -32,20 +42,32 @@ const Category = () => {
                     <img src={img1} alt="" />
                     <p className='text-2xl text-white -mt-20 uppercase text-center'>salads</p>
                 </SwiperSlide>
-                <SwiperSlide><img src={img2} alt="" />
-                    <p className='text-2xl text-white -mt-20 uppercase text-center'>pizza</p></SwiperSlide>
-                <SwiperSlide><img src={img3} alt="" />
-                    <p className='text-2xl text-white -mt-20 uppercase text-center'>soups</p></SwiperSlide>
-                <SwiperSlide><img src={img4} alt="" />
-                    <p className='text-2xl text-white -mt-20 uppercase text-center'>deserts</p></SwiperSlide>
-                <SwiperSlide><img src={img5} alt="" />
-                    <p className='text-2xl text-white -mt-20 uppercase text-center'>salads</p></SwiperSlide>
-                <SwiperSlide><img src={img2} alt="" />
-                    <p className='text-2xl text-white -mt-16 uppercase text-center'>pizza</p></SwiperSlide>
-                <SwiperSlide><img src={img3} alt="" />
-                    <p className='text-2xl text-white -mt-20 uppercase text-center'>soups</p></SwiperSlide>
-
+                <SwiperSlide>
+                    <img src={img2} alt="" />
+                    <p className='text-2xl text-white -mt-20 uppercase text-center'>pizza</p>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <img src={img3} alt="" />
+                    <p className='text-2xl text-white -mt-20 uppercase text-center'>soups</p>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <img src={img4} alt="" />
+                    <p className='text-2xl text-white -mt-20 uppercase text-center'>deserts</p>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <img src={img5} alt="" />
+                    <p className='text-2xl text-white -mt-20 uppercase text-center'>salads</p>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <img src={img2} alt="" />
+                    <p className='text-2xl text-white -mt-20 uppercase text-center'>pizza</p>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <img src={img3} alt="" />
+                    <p className='text-2xl text-white -mt-20 uppercase text-center'>soups</p>
+                </SwiperSlide>
             </Swiper>
+
         </section>
     )
 }
