@@ -16,7 +16,7 @@ const PopularMenu = () => {
 
     console.log(menu)
     return (
-        <section>
+        <section className='mb-24'>
             <SectionTitle heading='from our menu' subHeading='Popular items'></SectionTitle>
 
             <div className='grid md:grid-cols-2 gap-8 mx-4 md:mx-0'>
