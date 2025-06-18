@@ -4,7 +4,7 @@ import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa6'
 const Footer = () => {
     return (
         <div>
-            <div className='grid grid-cols-1 md:grid-cols-2'>
+            <div className='grid grid-cols-1 md:grid-cols-2 mt-20'>
                 {/* lest side */}
                 <div className='bg-[#1F2937] text-white flex flex-col justify-center items-center py-10 space-y-2'>
                     <h1 className='font-semibold'>CONTACT US</h1>
