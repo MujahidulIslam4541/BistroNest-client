@@ -31,24 +31,32 @@ const OurShope = () => {
                     </div>
                 </TabPanel>
                 <TabPanel>
-                    {
-                        pizza.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
-                    }
+                    <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
+                        {
+                            pizza.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
+                        }
+                    </div>
                 </TabPanel>
                 <TabPanel>
-                    {
-                        soup.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
-                    }
+                    <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
+                        {
+                            soup.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
+                        }
+                    </div>
                 </TabPanel>
                 <TabPanel>
-                    {
-                        salad.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
-                    }
+                    <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
+                        {
+                            salad.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
+                        }
+                    </div>
                 </TabPanel>
                 <TabPanel>
-                    {
-                        drinks.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
-                    }
+                    <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
+                        {
+                            drinks.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
+                        }
+                    </div>
                 </TabPanel>
 
             </Tabs>
