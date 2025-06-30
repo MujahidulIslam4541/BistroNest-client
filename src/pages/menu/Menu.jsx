@@ -5,6 +5,7 @@ import dessertImage from '../../assets/menu/dessert-bg.jpeg'
 import pizzaImage from '../../assets/menu/pizza-bg.jpg'
 import saladImage from '../../assets/menu/salad-bg.jpg'
 import soupImage from '../../assets/menu/soup-bg.jpg'
+import drinksImage from '../../assets/menu/drinks.jpeg'
 import SectionTitle from '../../components/sectionTitle/SectionTitle'
 import MenuCategory from './menuCategory/MenuCategory'
 import useMenuItem from '../../hooks/useMenuItem'
@@ -45,6 +46,11 @@ const Menu = () => {
 
             {/* soup menu items */}
             <Cover img={soupImage} heading={'soup'} subHeading={'Would you like to try a dish?'}></Cover>
+            <MenuCategory items={soup}></MenuCategory>
+
+
+            {/* drinks menu items */}
+            <Cover img={drinksImage} heading={'drinks'} subHeading={'Would you like to try a dish?'}></Cover>
             <MenuCategory items={soup}></MenuCategory>
 
 

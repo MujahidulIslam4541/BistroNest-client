@@ -278,5 +278,21 @@
     "image": "https://images.unsplash.com/photo-1571079931708-1e59739ba1b9",
     "category": "drinks",
     "price": 14.7
+  },
+  {
+    "_id": "642c155b2c4774f05c36eeba",
+    "name": "Haddock",
+    "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
+    "image": "https://images.unsplash.com/photo-1571079931708-1e59739ba1b9",
+    "category": "drinks",
+    "price": 14.7
+  },
+  {
+    "_id": "642c155b2c4774f05c36eeba",
+    "name": "Haddock",
+    "recipe": "Chargrilled fresh tuna steak (served medium rare) on classic Niçoise salad with French beans.",
+    "image": "https://images.unsplash.com/photo-1571079931708-1e59739ba1b9",
+    "category": "drinks",
+    "price": 14.7
   }
 ]

@@ -8,7 +8,8 @@ const useMenuItem = () => {
     const dessert = menu.filter(item => item.category === 'dessert')
     const pizza = menu.filter(item => item.category === 'pizza')
     const soup = menu.filter(item => item.category === 'soup')
-    return [offered, salad, dessert, pizza, soup]
+    const drinks = menu.filter(item => item.category === 'drinks')
+    return [offered, salad, dessert, pizza, soup, drinks]
 }
 
 export default useMenuItem
