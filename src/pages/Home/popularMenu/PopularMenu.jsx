@@ -2,6 +2,7 @@
 import SectionTitle from '../../../components/sectionTitle/SectionTitle'
 import MenuItems from '../../../components/menuItems/MenuItems'
 import useMenu from '../../../hooks/useMenu'
+import { Link } from 'react-router-dom'
 
 const PopularMenu = () => {
     const [menu] = useMenu()
@@ -16,9 +17,9 @@ const PopularMenu = () => {
                 }
             </div>
             <div className='flex justify-center items-center'>
-                <button className="border-b-2 border-black hover:bg-orange-400 hover:text-white transition-all px-6 py-2 rounded-md mt-2">
+                < Link to='/shope' className="border-b-2 border-black hover:bg-orange-400 hover:text-white transition-all px-6 py-2 rounded-md mt-2">
                     View More Menu
-                </button>
+                </ Link>
             </div>
         </section>
     )

@@ -26,35 +26,35 @@ const OurShope = () => {
                 <TabPanel>
                     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                         {
-                            dessert.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
+                            dessert.map(item => <FoodCard item={item} key={item._id}></FoodCard>)
                         }
                     </div>
                 </TabPanel>
                 <TabPanel>
                     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                         {
-                            pizza.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
+                            pizza.map(item => <FoodCard item={item} key={item._id}></FoodCard>)
                         }
                     </div>
                 </TabPanel>
                 <TabPanel>
                     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                         {
-                            soup.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
+                            soup.map(item => <FoodCard item={item} key={item._id}></FoodCard>)
                         }
                     </div>
                 </TabPanel>
                 <TabPanel>
                     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                         {
-                            salad.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
+                            salad.map(item => <FoodCard item={item} key={item._id}></FoodCard>)
                         }
                     </div>
                 </TabPanel>
                 <TabPanel>
                     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                         {
-                            drinks.map(item => <FoodCard item={item} key={item.id}></FoodCard>)
+                            drinks.map(item => <FoodCard item={item} key={item._id}></FoodCard>)
                         }
                     </div>
                 </TabPanel>
