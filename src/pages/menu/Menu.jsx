@@ -11,7 +11,7 @@ import MenuCategory from './menuCategory/MenuCategory'
 import useMenuItem from '../../hooks/useMenuItem'
 
 const Menu = () => {
-    const [offered, salad, dessert, pizza, soup] = useMenuItem()
+    const [offered, salad, dessert, pizza, soup, drinks] = useMenuItem()
     return (
         <div>
             <Helmet>
@@ -25,33 +25,33 @@ const Menu = () => {
 
             {/* offered menu items */}
             <SectionTitle subHeading={"Don't miss "} heading={"today 's Offer"}></SectionTitle>
-            <MenuCategory items={offered}></MenuCategory>
+            <MenuCategory items={offered} title={"offered"}></MenuCategory>
 
 
             {/* dessert menu items */}
             <Cover img={dessertImage} heading={'dessert'} subHeading={'Would you like to try a dish?'}></Cover>
-            <MenuCategory items={dessert}></MenuCategory>
+            <MenuCategory items={dessert} title={"dessert"}></MenuCategory>
 
 
             {/* pizza menu items */}
             <Cover img={pizzaImage} heading={'pizza'} subHeading={'Would you like to try a dish?'}></Cover>
-            <MenuCategory items={pizza}></MenuCategory>
+            <MenuCategory items={pizza} title={"pizza"}></MenuCategory>
 
 
             {/* salad menu items */}
             <Cover img={saladImage} heading={'salad'} subHeading={'Would you like to try a dish?'}></Cover>
-            <MenuCategory items={salad}></MenuCategory>
+            <MenuCategory items={salad} title={"salad"}></MenuCategory>
 
 
 
             {/* soup menu items */}
             <Cover img={soupImage} heading={'soup'} subHeading={'Would you like to try a dish?'}></Cover>
-            <MenuCategory items={soup}></MenuCategory>
+            <MenuCategory items={soup} title={"soup"}></MenuCategory>
 
 
             {/* drinks menu items */}
             <Cover img={drinksImage} heading={'drinks'} subHeading={'Would you like to try a dish?'}></Cover>
-            <MenuCategory items={soup}></MenuCategory>
+            <MenuCategory items={drinks} title={"drinks"}></MenuCategory>
 
 
         </div>

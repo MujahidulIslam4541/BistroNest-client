@@ -5,13 +5,27 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import FoodCard from '../../components/foodCard/FoodCard';
 import useMenuItem from '../../hooks/useMenuItem';
+import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 
 const OurShope = () => {
-    const [shopeTabs, setShopeTabs] = useState(0)
+    const categories = ['dessert', 'pizza', 'soup', 'salad', 'drinks']
+    const { category } = useParams()
+    const initialCategory = categories.indexOf(category)
+    const [shopeTabs, setShopeTabs] = useState(initialCategory)
     const [drinks, salad, dessert, pizza, soup] = useMenuItem()
+
+    console.log(category)
     return (
         <div>
+
+            <Helmet>
+                <title>Bistro Nest || Our Shope</title>
+            </Helmet>
+
+
+
             <Cover img={shopeImage} heading={"Our shope"} subHeading={'loremsdgffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd'}></Cover>
 
 
