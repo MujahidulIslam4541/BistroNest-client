@@ -48,14 +48,6 @@
     "price": 12.5
   },
   {
-    "_id": "6",
-    "name": "Escalope de Veau",
-    "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
-    "image": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092",
-    "category": "pizza",
-    "price": 12.5
-  },
-  {
     "_id": "7",
     "name": "Escalope de Veau",
     "recipe": "Pan roasted haddock fillet wrapped in smoked French bacon with pea purée and tomato and chive vinaigrette",
@@ -166,8 +158,7 @@
     "image": "https://images.unsplash.com/photo-1559628232-145d1d27382d",
     "category": "offered",
     "price": 12.5
-  },
-  {
+  },  {
     "_id": "21",
     "name": "Fish Parmentier",
     "recipe": "Sautéed breaded veal escalope with watercress, lemon and veal jus.",
@@ -295,4 +286,5 @@
     "category": "drinks",
     "price": 14.7
   }
+  
 ]
