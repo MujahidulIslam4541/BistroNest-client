@@ -25,11 +25,11 @@ const router = createBrowserRouter([
                 path: 'shope/:category',
                 element: <OurShope></OurShope>
             },
-            {
-                path: '/signIn',
-                element: <SignIn></SignIn>
-            }
         ]
+    },
+    {
+        path: '/signIn',
+        element: <SignIn></SignIn>
     }
 ])
 
