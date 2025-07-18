@@ -6,6 +6,7 @@ import Error from "../components/ErrorPage/Error";
 import Menu from "../pages/menu/Menu";
 import OurShope from "../pages/shope/OurShope";
 import SignIn from "../pages/signIn/SignIn";
+import SignUp from "../pages/signUp/SignUp";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
     {
         path: '/signIn',
         element: <SignIn></SignIn>
+    },
+    {
+        path: '/signUp',
+        element: <SignUp></SignUp>
     }
 ])
 

@@ -60,12 +60,12 @@ const SignIn = () => {
                             <input type="text" className="input w-full bg-white" placeholder="Type here" />
                         </div>
 
-                        <input type="submit" className="btn w-full bg-[#DBB884] hover:bg-[#c8a75f] text-white">
+                        <button type="submit" className="btn w-full bg-[#DBB884] hover:bg-[#c8a75f] text-white">
                             Sign In
-                        </input>
+                        </button>
 
                         <div className="text-center mt-4">
-                            <Link to="/register" className="text-[#DBB884] hover:underline">
+                            <Link to="/signUp" className="text-[#DBB884] hover:underline">
                                 New Here? Create a new Account
                             </Link>
                             <div className="divider">OR Sign In With</div>
