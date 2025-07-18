@@ -2,8 +2,15 @@ import { Link } from 'react-router-dom';
 import signInImage from '../../assets/others/authentication2.png';
 import signInBgImage from '../../assets/others/authentication.png';
 import SignInWithSocial from '../../components/signinWithSocial/SignInWithGoogle';
+import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { useEffect, useRef } from 'react';
+import toast from 'react-hot-toast';
 
 const SignIn = () => {
+    const captchaRef = useRef(null)
+    useEffect(() => {
+        loadCaptchaEnginge(6);
+    }, [])
 
     const handleSignIn = (event) => {
         event.preventDefault()
@@ -13,6 +20,18 @@ const SignIn = () => {
         console.log(email, password)
     }
 
+    const handleValidateCaptcha = () => {
+        const UserCaptchaValue = captchaRef.current.value;
+
+
+        if (validateCaptcha(UserCaptchaValue)) {
+            alert('Captcha Matched');
+        }
+
+        else {
+           return toast.error('Captcha does not match');
+        }
+    }
 
     return (
         <div
@@ -37,7 +56,7 @@ const SignIn = () => {
                 </div>
 
                 {/* Right Form Section */}
-                <form onSubmit={handleSignIn}  className="w-full lg:w-1/2 max-w-md">
+                <form onSubmit={handleSignIn} className="w-full lg:w-1/2 max-w-md">
                     <fieldset className="space-y-4">
                         <h2 className="text-2xl font-semibold text-center mb-4">Please Sign In</h2>
 
@@ -51,13 +70,13 @@ const SignIn = () => {
                             <input name='password' type="password" className="input w-full bg-white" placeholder="Enter your password" />
                         </div>
 
-                        <div>
-                            <input type="text" className="input w-full bg-white" placeholder="Captcha" />
-                        </div>
+
+
 
                         <div>
-                            <h2 className="text-blue-600">Reload Captcha</h2>
-                            <input type="text" className="input w-full bg-white" placeholder="Type here" />
+                            <LoadCanvasTemplate />
+                            <input ref={captchaRef} type="text" name='captcha' className="input w-full bg-white" placeholder="Type the captcha above"  onBlur={handleValidateCaptcha}/>
+
                         </div>
 
                         <button type="submit" className="btn w-full bg-[#DBB884] hover:bg-[#c8a75f] text-white">
