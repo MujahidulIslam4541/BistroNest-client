@@ -5,8 +5,10 @@ import SignInWithSocial from '../../components/signinWithSocial/SignInWithGoogle
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { useEffect, useRef } from 'react';
 import toast from 'react-hot-toast';
+import UseContext from '../../hooks/useContext';
 
 const SignIn = () => {
+    const {signIn}=UseContext()
     const captchaRef = useRef(null)
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -18,6 +20,13 @@ const SignIn = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password)
+
+        // sign in user
+        signIn(email,password)
+        .then(result=>{
+            const user=result.user;
+            console.log(user)
+        })
     }
 
     const handleValidateCaptcha = () => {
