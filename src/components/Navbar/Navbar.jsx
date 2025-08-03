@@ -2,15 +2,25 @@ import React from 'react'
 import { FaUserCircle } from 'react-icons/fa'
 import { FaCartPlus } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
+import UseContext from '../../hooks/useContext'
+import toast from 'react-hot-toast'
 
 const Navbar = () => {
-
+    const { logOut, user } = UseContext()
     const navItem = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/Contact Us'>Contact Us</Link></li>
         <li><Link to='/menu'>Our Menu</Link></li>
         <li><Link to='/shope/dessert'>Our Shope</Link></li>
     </>
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { toast.success('User Sign Out Successful ') })
+            .catch(error => {
+                toast.error(error.message)
+            })
+    }
     return (
         <div>
             <div className="navbar fixed z-10 bg-black/30  max-w-7xl mx-auto shadow-sm text-white">
@@ -43,11 +53,17 @@ const Navbar = () => {
                     </div>
 
                     {/* Sign In Button */}
-                    <Link to="/signIn">
-                        <button className="px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md text-black font-medium">
-                            Sign In
-                        </button>
-                    </Link>
+                    {user ?
+                        <Link >
+                            <button onClick={handleLogOut} className="px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md text-black font-medium">
+                                Sign Out
+                            </button>
+                        </Link>
+                        : <Link to="/signIn">
+                            <button className="px-4 py-1 bg-yellow-400 hover:bg-yellow-500 rounded-md text-black font-medium">
+                                Sign In
+                            </button>
+                        </Link>}
 
                     {/* User Icon */}
                     <FaUserCircle className="text-3xl text-white hover:text-yellow-400 cursor-pointer" />
