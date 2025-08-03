@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import signInImage from '../../assets/others/authentication2.png';
 import signInBgImage from '../../assets/others/authentication.png';
 import SignInWithSocial from '../../components/signinWithSocial/SignInWithGoogle';
@@ -12,6 +12,10 @@ import Swal from 'sweetalert2';
 const SignIn = () => {
     const { signIn } = UseContext()
     const captchaRef = useRef(null)
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    const from = location.state?.from?.pathname || "/";
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
@@ -29,13 +33,14 @@ const SignIn = () => {
                 const user = result.user;
                 if (user) {
                     Swal.fire({
-                        position: "top-end",
+                        position:"top-end",
                         icon: "success",
                         title: "Welcome back! You’ve logged in successfully. 🎉",
                         showConfirmButton: false,
                         timer: 1000
                     });
                 }
+                navigate(from, { replace: true });
             })
     }
 
@@ -44,7 +49,7 @@ const SignIn = () => {
 
 
         if (validateCaptcha(UserCaptchaValue)) {
-            toast.success('Captcha match')
+            // toast.success('Captcha match')
         }
 
         else {

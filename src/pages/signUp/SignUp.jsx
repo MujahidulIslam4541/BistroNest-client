@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import SignInWithSocial from '../../components/signinWithSocial/SignInWithGoogle';
@@ -10,8 +10,8 @@ import UseContext from '../../hooks/useContext';
 import Swal from 'sweetalert2';
 
 const SignUp = () => {
-
-    const { createUser } = UseContext()
+    const navigate = useNavigate()
+    const { createUser, UpdateUserProfile } = UseContext()
     const {
         register,
         handleSubmit,
@@ -25,15 +25,18 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 if (user) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Your account has been created successfully. Welcome aboard! 🎉",
-                        showConfirmButton: false,
-                        timer: 1000
-                    });
+                    UpdateUserProfile(data.name, data.photoURL)
+                        .then(() => {
+                            toast.success("Your account has been created successfully. Welcome aboard! 🎉")
+                        })
+                    reset()
+                    navigate('/')
                 }
-                reset()
+
+            })
+            .catch(error => {
+                console.log(error.message)
+                toast.error(error.message)
             })
     };
 
@@ -92,6 +95,17 @@ const SignUp = () => {
                                     <input
                                         {...register("name", { required: true })}
                                         type="text"
+                                        className="input w-full bg-white"
+                                        placeholder="Type here"
+                                    />
+                                </div>
+
+
+                                <div>
+                                    <label className="label">Photo URL</label>
+                                    <input
+                                        {...register("photo", { required: true })}
+                                        type="url"
                                         className="input w-full bg-white"
                                         placeholder="Type here"
                                     />
