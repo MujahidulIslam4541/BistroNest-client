@@ -4,9 +4,11 @@ import { FaCartPlus } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
 import UseContext from '../../hooks/useContext'
 import toast from 'react-hot-toast'
+import useCart from '../../hooks/useCart'
 
 const Navbar = () => {
     const { logOut, user } = UseContext()
+    const [cart]=useCart()
     const navItem = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/Contact Us'>Contact Us</Link></li>
@@ -49,7 +51,7 @@ const Navbar = () => {
                     <div className="relative">
                         <FaCartPlus className="text-2xl text-white hover:text-yellow-400 cursor-pointer" />
                         {/* Optional badge */}
-                        <span className="absolute top-0 right-0 text-xs bg-red-500 text-white px-1 rounded-full">0
+                        <span className="absolute top-0 right-0 text-xs bg-red-500 text-white px-1 rounded-full">{cart.length}
                         </span>
                     </div>
 

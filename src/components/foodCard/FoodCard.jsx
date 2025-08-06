@@ -2,13 +2,15 @@
 import UseContext from "../../hooks/useContext";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import toast from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 
 const FoodCard = ({ item }) => {
     const { user } = UseContext()
     const navigate = useNavigate()
     const location = useLocation()
+    const axiosSecure = useAxiosSecure()
     const { name, image, recipe, price, _id } = item || {};
 
     const handleAddToCart = food => {
@@ -21,9 +23,11 @@ const FoodCard = ({ item }) => {
                 image,
                 price
             }
-            axios.post('http://localhost:3000/carts', cartItem)
+            axiosSecure.post('/cart', cartItem)
                 .then(res => {
-                    console.log(res.data)
+                    if (res.data.insertedId) {
+                        toast.success(`Great choice! ${name} is now in your cart 🛍️`);
+                    }
                 })
         }
         else {
