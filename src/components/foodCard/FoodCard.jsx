@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useCart from "../../hooks/useCart";
 
 
 const FoodCard = ({ item }) => {
@@ -11,6 +12,7 @@ const FoodCard = ({ item }) => {
     const navigate = useNavigate()
     const location = useLocation()
     const axiosSecure = useAxiosSecure()
+    const [, refetch] = useCart()
     const { name, image, recipe, price, _id } = item || {};
 
     const handleAddToCart = food => {
@@ -27,6 +29,7 @@ const FoodCard = ({ item }) => {
                 .then(res => {
                     if (res.data.insertedId) {
                         toast.success(`Great choice! ${name} is now in your cart 🛍️`);
+                        refetch()
                     }
                 })
         }

@@ -17,10 +17,12 @@ const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
         <HelmetProvider>
-            <AuthProvider>
-                <RouterProvider router={router} />
-                <Toaster />
-            </AuthProvider>
+            <div className="max-w-7xl mx-auto">
+                <AuthProvider>
+                    <RouterProvider router={router} />
+                    <Toaster />
+                </AuthProvider>
+            </div>
         </HelmetProvider>
     </QueryClientProvider>
 

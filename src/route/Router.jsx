@@ -7,6 +7,8 @@ import Menu from "../pages/menu/Menu";
 import OurShope from "../pages/shope/OurShope";
 import SignIn from "../pages/signIn/SignIn";
 import SignUp from "../pages/signUp/SignUp";
+import Dashboard from "../layoutes/Dashboard";
+import Cart from "../pages/Dashboard/cart/Cart";
 
 const router = createBrowserRouter([
     {
@@ -20,22 +22,34 @@ const router = createBrowserRouter([
             },
             {
                 path: 'menu',
-                element:<Menu></Menu>
+                element: <Menu></Menu>
             },
             {
                 path: 'shope/:category',
                 element: <OurShope></OurShope>
             },
+            {
+                path: '/signIn',
+                element: <SignIn></SignIn>
+            },
+            {
+                path: '/signUp',
+                element: <SignUp></SignUp>
+            }
         ]
     },
+
     {
-        path: '/signIn',
-        element: <SignIn></SignIn>
-    },
-    {
-        path: '/signUp',
-        element: <SignUp></SignUp>
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>,
+        children: [
+            {
+                path: '/dashboard/cart',
+                element: <Cart></Cart>
+            }
+        ]
     }
+
 ])
 
 export default router;

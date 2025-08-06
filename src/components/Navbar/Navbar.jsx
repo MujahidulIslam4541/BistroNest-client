@@ -8,7 +8,7 @@ import useCart from '../../hooks/useCart'
 
 const Navbar = () => {
     const { logOut, user } = UseContext()
-    const [cart]=useCart()
+    const [cart] = useCart()
     const navItem = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/Contact Us'>Contact Us</Link></li>
@@ -49,10 +49,11 @@ const Navbar = () => {
                 <div className="navbar-end space-x-4 items-center">
                     {/* Cart Icon */}
                     <div className="relative">
-                        <FaCartPlus className="text-2xl text-white hover:text-yellow-400 cursor-pointer" />
-                        {/* Optional badge */}
-                        <span className="absolute top-0 right-0 text-xs bg-red-500 text-white px-1 rounded-full">{cart.length}
-                        </span>
+                        <Link to='/dashboard/cart'>
+                            <FaCartPlus className="text-2xl text-white hover:text-yellow-400 cursor-pointer" />
+                            {/* Optional badge */}
+                            <span className="absolute top-0 right-0 text-xs bg-red-500 text-white px-1 rounded-full">{cart.length}
+                            </span></Link>
                     </div>
 
                     {/* Sign In Button */}
