@@ -17,7 +17,7 @@ const PopularMenu = () => {
                 }
             </div>
             <div className='flex justify-center items-center'>
-                < Link to='/shope' className="border-b-2 border-black hover:bg-orange-400 hover:text-white transition-all px-6 py-2 rounded-md mt-2">
+                < Link to='/shope/dessert' className="border-b-2 border-black hover:bg-orange-400 hover:text-white transition-all px-6 py-2 rounded-md mt-2">
                     View More Menu
                 </ Link>
             </div>

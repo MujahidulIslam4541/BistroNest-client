@@ -49,7 +49,8 @@ const Navbar = () => {
                     <div className="relative">
                         <FaCartPlus className="text-2xl text-white hover:text-yellow-400 cursor-pointer" />
                         {/* Optional badge */}
-                        {/* <span className="absolute top-0 right-0 text-xs bg-red-500 text-white px-1 rounded-full">3</span> */}
+                        <span className="absolute top-0 right-0 text-xs bg-red-500 text-white px-1 rounded-full">0
+                        </span>
                     </div>
 
                     {/* Sign In Button */}
