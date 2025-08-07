@@ -1,10 +1,12 @@
 import { MdDeleteForever } from "react-icons/md";
 import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Cart = () => {
-    const [cart] = useCart();
+    const [cart,refetch] = useCart();
     const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+    const axiosSecure = useAxiosSecure()
 
     const handleItemDelete = (id) => {
         Swal.fire({
@@ -17,14 +19,18 @@ const Cart = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-
-                // item deleted on database
-                console.log("Delete ID:", id);
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
+                axiosSecure.delete(`/cart/${id}`)
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.deletedCount>0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                            refetch()
+                        }
+                    })
             }
         });
     };
@@ -71,7 +77,7 @@ const Cart = () => {
                                         </div>
                                     </td>
                                     <td className="font-medium text-gray-800">{item?.name}</td>
-                                    <td className="text-gray-600">{item?.email}</td>
+                                    <td className="text-gray-600">${item?.price}</td>
                                     <td>
                                         <button
                                             onClick={() => handleItemDelete(item._id)}
