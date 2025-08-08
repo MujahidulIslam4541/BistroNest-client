@@ -7,10 +7,11 @@ import signInImage from '../../assets/others/authentication2.png';
 import signInBgImage from '../../assets/others/authentication.png';
 import { Helmet } from 'react-helmet-async';
 import UseContext from '../../hooks/useContext';
-import Swal from 'sweetalert2';
+import useAxiosOpen from '../../hooks/useAxiosOpen';
 
 const SignUp = () => {
     const navigate = useNavigate()
+    const axiosPublic = useAxiosOpen()
     const { createUser, UpdateUserProfile } = UseContext()
     const {
         register,
@@ -27,15 +28,25 @@ const SignUp = () => {
                 if (user) {
                     UpdateUserProfile(data.name, data.photoURL)
                         .then(() => {
-                            toast.success("Your account has been created successfully. Welcome aboard! 🎉")
+                            const userInfo = {
+                                name: data.name,
+                                email: data.email,
+                            }
+                            axiosPublic.post('/user', userInfo)
+                                .then(res => {
+                                    if (res.data.insertedId) {
+                                        toast.success("Your account has been created successfully. Welcome aboard! 🎉")
+                                        reset()
+                                        navigate('/')
+                                    }
+                                })
+
                         })
-                    reset()
-                    navigate('/')
+
                 }
 
             })
             .catch(error => {
-                console.log(error.message)
                 toast.error(error.message)
             })
     };
