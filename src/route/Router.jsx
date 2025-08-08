@@ -9,6 +9,7 @@ import SignIn from "../pages/signIn/SignIn";
 import SignUp from "../pages/signUp/SignUp";
 import Dashboard from "../layoutes/Dashboard";
 import Cart from "../pages/Dashboard/cart/Cart";
+import PaymentHistory from "../pages/Dashboard/paymentHistory/PaymentHistory";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/cart',
                 element: <Cart></Cart>
+            },
+            {
+                path:'/dashboard/payment',
+                element:<PaymentHistory></PaymentHistory>
             }
         ]
     }
