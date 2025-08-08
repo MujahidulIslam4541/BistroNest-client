@@ -97,7 +97,7 @@ const SignUp = () => {
                         </div>
 
                         {/* Right Form */}
-                        <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-1/2 max-w-md">
+                        <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-1/2 max-w-md  p-6  ">
                             <fieldset className="space-y-4">
                                 <h2 className="text-2xl font-semibold text-center mb-4">Please Sign Up</h2>
 
@@ -110,7 +110,6 @@ const SignUp = () => {
                                         placeholder="Type here"
                                     />
                                 </div>
-
 
                                 <div>
                                     <label className="label">Photo URL</label>
@@ -148,15 +147,24 @@ const SignUp = () => {
                                     />
                                 </div>
 
+                                {/* Submit Button */}
                                 <button type="submit" className="btn w-full bg-[#DBB884] hover:bg-[#c8a75f] text-white">
                                     Sign Up
                                 </button>
 
-                                <div className="text-center mt-4">
-                                    <Link to="/signIn" className="text-[#DBB884] hover:underline">
-                                        New Here? Create a new Account
+                                {/* Link */}
+                                <p className="text-center mt-3 text-sm">
+                                    Already have an account?{" "}
+                                    <Link to="/signIn" className="text-[#DBB884] hover:underline font-medium">
+                                        Sign In
                                     </Link>
-                                    <div className="divider">OR Sign Up With</div>
+                                </p>
+
+                                {/* Divider */}
+                                <div className="divider text-gray-500 text-sm">OR</div>
+
+                                {/* Social Sign In */}
+                                <div className="flex flex-col gap-3">
                                     <SignInWithSocial />
                                 </div>
                             </fieldset>
@@ -164,6 +172,7 @@ const SignUp = () => {
                     </div>
                 </div>
             </div>
+
         </>
     );
 };
