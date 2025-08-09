@@ -1,12 +1,12 @@
-import React from 'react'
 import { FaFacebook } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 import UseContext from '../../hooks/useContext'
 import useAxiosOpen from '../../hooks/useAxiosOpen'
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 const SignInWithSocial = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const { googleSignIn } = UseContext()
   const axiosPublic = useAxiosOpen()
   const handleGoogleSignIn = () => {
@@ -20,6 +20,7 @@ const SignInWithSocial = () => {
         axiosPublic.post('/user', userinfo)
           .then(res => {
             console.log(res.data)
+            toast.success("Your account has been created successfully. Welcome aboard! 🎉")
             navigate('/')
           })
       })

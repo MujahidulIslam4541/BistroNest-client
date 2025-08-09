@@ -10,6 +10,7 @@ import SignUp from "../pages/signUp/SignUp";
 import Dashboard from "../layoutes/Dashboard";
 import Cart from "../pages/Dashboard/cart/Cart";
 import PaymentHistory from "../pages/Dashboard/paymentHistory/PaymentHistory";
+import AllUsers from "../pages/Dashboard/allUsers/AllUsers";
 
 const router = createBrowserRouter([
     {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
             {
                 path:'/dashboard/payment',
                 element:<PaymentHistory></PaymentHistory>
+            },
+            {
+                path: '/dashboard/users',
+                element: <AllUsers></AllUsers>
             }
         ]
     }

@@ -1,4 +1,4 @@
-import { FaCartPlus, FaHome } from 'react-icons/fa'
+import { FaCartPlus, FaHome, FaUser, FaUsers, FaUtensils } from 'react-icons/fa'
 import { NavLink, Outlet } from 'react-router-dom'
 import { SlCalender } from "react-icons/sl";
 import { MdEmail, MdLibraryBooks, MdPayments, MdOutlineReviews } from "react-icons/md";
@@ -6,6 +6,12 @@ import { TiThMenu } from "react-icons/ti";
 import { RiShoppingBag2Fill } from "react-icons/ri";
 
 const Dashboard = () => {
+
+
+    // TODO: get is Admin value from the database or context
+    const isAdmin = true; // Replace with actual admin check logic
+
+
     const navLinkStyle = ({ isActive }) =>
         isActive
             ? "flex items-center gap-3 py-2 px-4 bg-[#924c0b] text-white rounded-md"
@@ -23,38 +29,68 @@ const Dashboard = () => {
                     </NavLink>
                 </div>
 
-                {/* Navigation Links */}
+                {/* Navigation Links for Admin and User */}
                 <ul className='space-y-2'>
-                    <li>
-                        <NavLink to='/dashboard/userHome' className={navLinkStyle}>
-                            <FaHome /> User Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/dashboard/reservation' className={navLinkStyle}>
-                            <SlCalender /> Reservation
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/dashboard/payment' className={navLinkStyle}>
-                            <MdPayments /> Payment History
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/dashboard/cart' className={navLinkStyle}>
-                            <FaCartPlus/>My Cart
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/dashboard/review' className={navLinkStyle}>
-                            <MdOutlineReviews /> Review
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to='/dashboard/booking' className={navLinkStyle}>
-                            <MdLibraryBooks /> Booking
-                        </NavLink>
-                    </li>
+
+                    {isAdmin ? <>
+                        <li>
+                            <NavLink to='/dashboard/adminHome' className={navLinkStyle}>
+                                <FaHome /> Admin Home
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/dashboard/addItem' className={navLinkStyle}>
+                                <FaUtensils /> Add Item
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/dashboard/items' className={navLinkStyle}>
+                                <TiThMenu /> Manage Items
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/dashboard/users' className={navLinkStyle}>
+                                <FaUsers /> All Users
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/dashboard/manageReviews' className={navLinkStyle}>
+                                <MdOutlineReviews /> Manage Reviews
+                            </NavLink>
+                        </li>
+                    </> : <>
+                        <li>
+                            <NavLink to='/dashboard/userHome' className={navLinkStyle}>
+                                <FaHome /> User Home
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/dashboard/reservation' className={navLinkStyle}>
+                                <SlCalender /> Reservation
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/dashboard/payment' className={navLinkStyle}>
+                                <MdPayments /> Payment History
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/dashboard/cart' className={navLinkStyle}>
+                                <FaCartPlus />My Cart
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/dashboard/review' className={navLinkStyle}>
+                                <MdOutlineReviews /> Review
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to='/dashboard/booking' className={navLinkStyle}>
+                                <MdLibraryBooks /> Booking
+                            </NavLink>
+                        </li>
+                    </>
+                    }
 
                     {/* Divider */}
                     <div className='border-t border-white my-4'></div>
@@ -81,6 +117,7 @@ const Dashboard = () => {
                         </NavLink>
                     </li>
                 </ul>
+
             </div>
 
             {/* Outlet */}
