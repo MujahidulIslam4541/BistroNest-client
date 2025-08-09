@@ -53,6 +53,7 @@ const router = createBrowserRouter([
                 path:'/dashboard/payment',
                 element:<PaymentHistory></PaymentHistory>
             },
+            // Admin Routes
             {
                 path: '/dashboard/users',
                 element: <AllUsers></AllUsers>
