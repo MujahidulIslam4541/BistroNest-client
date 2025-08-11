@@ -7,7 +7,7 @@ import Swal from "sweetalert2"
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure()
-    const { data: users = [],refetch } = useQuery({
+    const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users')
@@ -15,6 +15,7 @@ const AllUsers = () => {
         }
     })
 
+    // DELETE USER
     const handleUsersDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -26,7 +27,7 @@ const AllUsers = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/users/${id}`)
+                axiosSecure.delete(`/user/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             Swal.fire({
@@ -39,6 +40,21 @@ const AllUsers = () => {
                     })
             }
         });
+    }
+
+    // MAKE ADMIN
+    const handleMakeAdmin = (id) => {
+        axiosSecure.patch(`/user/admin/${id}`)
+            .then(res => {
+                if (res.data.modifiedCount > 0) {
+                    Swal.fire({
+                        title: "Success!",
+                        text: "User has been made an admin.",
+                        icon: "success"
+                    });
+                    refetch()
+                }
+            })
     }
     console.log(users)
     return (
@@ -66,11 +82,11 @@ const AllUsers = () => {
                                         <td>{index + 1}</td>
                                         <td>{user?.name}</td>
                                         <td>{user?.email}</td>
-                                        <td>  <button
+                                        <td> {user.role === 'admin' ? <h2 className="text-[#D1A054] font-semibold">Admin</h2> : <button onClick={() => handleMakeAdmin(user._id)}
                                             className=" bg-[#D1A054] text-white text-2xl px-2 py-2 rounded-sm transition"
                                         >
                                             <FaUsers />
-                                        </button></td>
+                                        </button>}</td>
                                         <td>                                        <button onClick={() => handleUsersDelete(user._id)}
                                             className="bg-[#B91C1C] text-white text-2xl px-2 py-2 rounded-sm transition"
                                         >
