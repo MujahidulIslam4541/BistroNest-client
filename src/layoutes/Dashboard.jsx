@@ -4,12 +4,13 @@ import { SlCalender } from "react-icons/sl";
 import { MdEmail, MdLibraryBooks, MdPayments, MdOutlineReviews } from "react-icons/md";
 import { TiThMenu } from "react-icons/ti";
 import { RiShoppingBag2Fill } from "react-icons/ri";
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
 
 
     // TODO: get is Admin value from the database or context
-    const isAdmin = true; // Replace with actual admin check logic
+    const [isAdmin] = useAdmin(); // Replace with actual admin check logic
 
 
     const navLinkStyle = ({ isActive }) =>
