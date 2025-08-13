@@ -4,7 +4,7 @@ import UseContext from '../hooks/useContext'
 import Loader from '../components/loader/Loader'
 
 const AdminRoute = ({ children }) => {
-    const [user, loading] = UseContext()
+    const { user, loading } = UseContext()
     const [isAdmin, isAdminLoading] = useAdmin()
     const location = useLocation()
     if (loading || isAdminLoading) {

@@ -3,6 +3,7 @@ import { MdDeleteForever } from "react-icons/md"
 import { useQuery } from "@tanstack/react-query"
 import useAxiosSecure from "../../../hooks/useAxiosSecure"
 import Swal from "sweetalert2"
+import SectionTitle from "../../../components/sectionTitle/SectionTitle"
 
 
 const AllUsers = () => {
@@ -59,6 +60,9 @@ const AllUsers = () => {
     console.log(users)
     return (
         <div>
+
+            <SectionTitle subHeading='Manage All Users' heading='All Users'></SectionTitle>
+
             <div className="max-w-6xl mx-auto mt-8 px-4">
                 <div className="bg-white shadow-md rounded-xl p-6 mb-6">
                     <h2 className="text-lg sm:text-2xl font-bold text-gray-700 mb-6">TOTAL USERS: {users.length}</h2>

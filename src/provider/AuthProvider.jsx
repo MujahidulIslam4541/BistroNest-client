@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser)
 
 
-            
+
             if (currentUser) {
                 // Create jwt Token
                 const userInfo = { email: currentUser?.email }
@@ -69,7 +69,7 @@ const AuthProvider = ({ children }) => {
         return () => {
             return unsubscribe()
         }
-    }, [auth])
+    }, [auth,axiosPublic])
 
     const authInfo = {
         user,
