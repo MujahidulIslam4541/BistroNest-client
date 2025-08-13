@@ -45,7 +45,7 @@ const Dashboard = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='/dashboard/items' className={navLinkStyle}>
+                            <NavLink to='/dashboard/manageItems' className={navLinkStyle}>
                                 <TiThMenu /> Manage Items
                             </NavLink>
                         </li>

@@ -7,37 +7,58 @@ import toast from "react-hot-toast";
 
 const imageHostKey = import.meta.env.VITE_IMAGE_UPLOAD_URL;
 const imgUploadUrl = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+
 const AddItem = () => {
-    const axiosPublic = useAxiosOpen()
-    const axiosSecure = useAxiosSecure()
-    const { register, handleSubmit, reset } = useForm()
+    const axiosPublic = useAxiosOpen();
+    const axiosSecure = useAxiosSecure();
+    const { register, handleSubmit, reset } = useForm();
+
+    // Handle form submission
     const onSubmit = async (data) => {
-        console.log(data)
-        // image upload img bb and get the url
+        console.log("Form data:", data);
+
+        // Prepare the image file for upload
         const imageFile = { image: data.image[0] };
-        const res = await axiosPublic.post(imgUploadUrl, imageFile, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
+
+        try {
+            // Upload the image to ImgBB
+            const res = await axiosPublic.post(imgUploadUrl, imageFile, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            // If image upload is successful
+            if (res.data.success) {
+                const imageUrl = res.data.data.display_url;
+
+                // Create menu item data to send to the server
+                const menuItem = {
+                    name: data.name,
+                    category: data.category,
+                    price: parseFloat(data.price),
+                    recipe: data.recipe,
+                    image: imageUrl
+                };
+
+                // Send menu data to the server (secured endpoint)
+                const menuData = await axiosSecure.post('/menu', menuItem);
+
+                // If menu item is successfully added
+                if (menuData.data.insertedId) {
+                    toast.success('Menu item added successfully!');
+                    reset(); // Reset form fields
+                }
+
+                // console.log("Menu data response:", menuData.data);
             }
-        })
-        if (res.data.success) {
-            // now send the menu data to the server
-            const menuItem = {
-                name: data.name,
-                category: data.category,
-                price: parseFloat(data.price),
-                recipe: data.recipe,
-                image: res.data.data.display_url
-            }
-            const menuData = await axiosSecure.post('/menu', menuItem)
-            if (menuData.data.insertedId) {
-                toast.success('Menu item added successfully!')
-                reset()
-            }
-            console.log('menu data', menuData.data)
+
+            // console.log("Image upload response:", res.data);
+        } catch (error) {
+
+            toast.error("Something went wrong. Please try again.",error.message);
         }
-        console.log('image upload url', res.data)
-    }
+    };
 
 
     return (
