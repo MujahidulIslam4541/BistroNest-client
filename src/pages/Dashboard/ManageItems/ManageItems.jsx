@@ -5,6 +5,7 @@ import { MdDeleteForever } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { Link } from 'react-router-dom';
 
 const ManageItems = () => {
     const [menu] = useMenu(); // Assuming useMenu is a custom hook to fetch menu items
@@ -72,12 +73,14 @@ const ManageItems = () => {
                                             <td className="font-medium text-gray-800">{item?.name}</td>
                                             <td className="text-gray-600">${item?.price}</td>
                                             <td>
-                                                <button
-                                                    className="text-[#D1A054] hover:text-[#924C0B] text-2xl transition"
-                                                    title="Delete"
-                                                >
-                                                    <FaEdit />
-                                                </button>
+                                                <Link to={`/dashboard/updateItem/${item._id}`}>
+                                                    <button
+                                                        className="text-[#D1A054] hover:text-[#924C0B] text-2xl transition"
+                                                        title="Delete"
+                                                    >
+                                                        <FaEdit />
+                                                    </button>
+                                                </Link>
                                             </td>
                                             <td>
                                                 <button
