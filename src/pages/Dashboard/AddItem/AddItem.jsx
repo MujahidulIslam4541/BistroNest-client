@@ -15,7 +15,7 @@ const AddItem = () => {
 
     // Handle form submission
     const onSubmit = async (data) => {
-        console.log("Form data:", data);
+        // console.log("Form data:", data);
 
         // Prepare the image file for upload
         const imageFile = { image: data.image[0] };

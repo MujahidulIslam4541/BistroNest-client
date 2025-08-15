@@ -3,6 +3,7 @@ import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import SectionTitle from "../../../components/sectionTitle/SectionTitle";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [cart, refetch] = useCart();
@@ -38,8 +39,8 @@ const Cart = () => {
     return (
         <>
 
-        <SectionTitle subHeading='Your Cart' heading='Selected Items'></SectionTitle>
-        
+            <SectionTitle subHeading='Your Cart' heading='Selected Items'></SectionTitle>
+
             <div className="max-w-6xl mx-auto mt-8 px-4">
                 {/* Summary Card + Table Container */}
                 <div className="bg-white shadow-md rounded-xl p-6 mb-6">
@@ -51,9 +52,12 @@ const Cart = () => {
                         <h3 className="text-lg sm:text-2xl font-bold text-gray-700">
                             Total Price: <span className="text-[#D1A054]">${totalPrice.toFixed(2)}</span>
                         </h3>
-                        <button className="mt-4 sm:mt-0 px-6 py-2 bg-[#D1A054] hover:bg-[#b37335] transition text-white font-semibold rounded-lg shadow-md">
+                        {cart.length ? <Link to='/dashboard/payment'>
+                            <button className="mt-4 sm:mt-0 px-6 py-2 bg-[#D1A054] hover:bg-[#b37335] transition text-white font-semibold rounded-lg shadow-md">
+                                Pay
+                            </button></Link> : <button disabled className="mt-4 sm:mt-0 px-6 py-2 bg-[#D1A054] hover:bg-[#b37335] transition text-white font-semibold rounded-lg shadow-md">
                             Pay
-                        </button>
+                        </button>}
                     </div>
 
                     {/* Cart Table */}
