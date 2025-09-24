@@ -10,21 +10,32 @@ import { Helmet } from 'react-helmet-async';
 
 
 const OurShope = () => {
+    // All category names
     const categories = ['dessert', 'pizza', 'soup', 'salad', 'drinks']
+
+    // Get category from the URL parameter
     const { category } = useParams()
+
+
+    // Find the initial tab index based on the URL category
     const initialCategory = categories.indexOf(category)
+
+    // State to track which tab is currently selected
     const [shopeTabs, setShopeTabs] = useState(initialCategory)
+
+    // Get menu items from custom hook
     const [drinks, salad, dessert, pizza, soup] = useMenuItem()
 
     console.log(category)
     return (
         <div>
 
+            {/* Set dynamic page title */}
             <Helmet>
                 <title>Bistro Nest || Our Shope</title>
             </Helmet>
 
-
+            {/* Top banner / cover section */}
             <Cover
                 img={shopeImage}
                 heading={"Our Shop"}
@@ -32,7 +43,7 @@ const OurShope = () => {
             />
 
 
-
+            {/* Tabs for menu categories */}
             <Tabs defaultIndex={shopeTabs} onSelect={(index) => setShopeTabs(index)}>
                 <TabList>
                     <Tab>DESSERT</Tab>
@@ -41,6 +52,7 @@ const OurShope = () => {
                     <Tab>SALAD</Tab>
                     <Tab>DRINKS</Tab>
                 </TabList>
+                {/* Dessert tab items */}
                 <TabPanel>
                     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                         {
@@ -48,6 +60,7 @@ const OurShope = () => {
                         }
                     </div>
                 </TabPanel>
+                {/* Pizza tab items */}
                 <TabPanel>
                     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                         {
@@ -55,6 +68,7 @@ const OurShope = () => {
                         }
                     </div>
                 </TabPanel>
+                {/* Soup tab items */}
                 <TabPanel>
                     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                         {
@@ -62,6 +76,7 @@ const OurShope = () => {
                         }
                     </div>
                 </TabPanel>
+                {/* Salad tab items */}
                 <TabPanel>
                     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                         {
@@ -69,6 +84,7 @@ const OurShope = () => {
                         }
                     </div>
                 </TabPanel>
+                {/* Drinks tab items */}
                 <TabPanel>
                     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                         {
