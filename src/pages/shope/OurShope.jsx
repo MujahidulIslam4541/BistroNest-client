@@ -25,8 +25,12 @@ const OurShope = () => {
             </Helmet>
 
 
+            <Cover
+                img={shopeImage}
+                heading={"Our Shop"}
+                subHeading={"Discover a wide range of products with quality you can trust. Shop your favorites today!"}
+            />
 
-            <Cover img={shopeImage} heading={"Our shope"} subHeading={'loremsdgffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd'}></Cover>
 
 
             <Tabs defaultIndex={shopeTabs} onSelect={(index) => setShopeTabs(index)}>
