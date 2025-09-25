@@ -95,11 +95,11 @@ const AddItem = () => {
                                 <option disabled value="">
                                     Select Category
                                 </option>
-                                <option>Dessert</option>
-                                <option>Pizza</option>
-                                <option>Salad</option>
-                                <option>Soup</option>
-                                <option>Drinks</option>
+                                <option>dessert</option>
+                                <option>pizza</option>
+                                <option>salad</option>
+                                <option>soup</option>
+                                <option>drinks</option>
                             </select>
                         </div>
 
