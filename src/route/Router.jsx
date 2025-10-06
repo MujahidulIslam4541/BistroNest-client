@@ -17,6 +17,7 @@ import ManageItems from "../pages/Dashboard/ManageItems/ManageItems";
 import UpdateItem from "../pages/Dashboard/UpdateItem/UpdateItem";
 import Payment from "../pages/Dashboard/payment/Payment";
 import Review from "../pages/Dashboard/Review.jsx/Review";
+import UserHome from "../pages/Dashboard/UserHome/UserHome";
 
 const router = createBrowserRouter([
     {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
             {
                 path:'review',
                 element:<Review></Review>
+            },
+            {
+                path:'userHome',
+                element:<UserHome></UserHome>
             },
             {
             },
