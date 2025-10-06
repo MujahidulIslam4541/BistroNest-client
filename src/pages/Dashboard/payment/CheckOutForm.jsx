@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCart from "../../../hooks/useCart";
+import UseContext from "../../../hooks/useContext";
 
 
 const CheckOutForm = () => {
@@ -11,9 +12,11 @@ const CheckOutForm = () => {
     const elements = useElements();
     const axiosSecure = useAxiosSecure()
     const [clientSecret, setClientSecret] = useState('')
+    const[paymentSuccess,setPaymentSuccess]=useState('')
     const [cart] = useCart()
+    const { user } = UseContext()
     const totalPrice = cart.reduce((total, item) => total + item.price, 0)
-
+    console.log(cart)
     useEffect(() => {
         axiosSecure.post('/create-payment-intent', { price: totalPrice })
             .then(res => {
@@ -48,6 +51,27 @@ const CheckOutForm = () => {
             console.log("payment method", paymentMethod);
             setError('')
         }
+
+        // confirm card payment
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: user?.displayName || "anonymous",
+                    email: user?.email || 'anonymous'
+                },
+            }
+        })
+
+        if (confirmError) {
+            console.log("confirm error", confirmError)
+        } else {
+            console.log("payment intent ", paymentIntent)
+            if (paymentIntent.status === "succeeded") {
+                console.log("your payment successful")
+                setPaymentSuccess(paymentIntent.id)
+            }
+        }
     }
     return (
         <>
@@ -72,10 +96,11 @@ const CheckOutForm = () => {
                         }}
                     />
 
-                    <button className="mt-4 sm:mt-0 px-6 py-2 bg-[#D1A054] hover:bg-[#b37335] transition text-white font-semibold rounded-lg shadow-md" type="submit" disabled={!stripe|| !clientSecret}>
+                    <button className="mt-4 sm:mt-0 px-6 py-2 bg-[#D1A054] hover:bg-[#b37335] transition text-white font-semibold rounded-lg shadow-md" type="submit" disabled={!stripe || !clientSecret}>
                         Pay
                     </button>
                     <p>{error}</p>
+                    <p>TransactionId:  {paymentSuccess}</p>
                 </form>
             </div>
         </>
