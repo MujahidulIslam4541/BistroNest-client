@@ -18,6 +18,7 @@ import UpdateItem from "../pages/Dashboard/UpdateItem/UpdateItem";
 import Payment from "../pages/Dashboard/payment/Payment";
 import Review from "../pages/Dashboard/Review.jsx/Review";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
+import AdminHome from "../pages/Dashboard/AdminHome/AdminHOme";
 
 const router = createBrowserRouter([
     {
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
             {
                 path: 'manageItems',
                 element: <AdminRoute><ManageItems></ManageItems></AdminRoute>
+            },
+            {
+                path: 'adminHome',
+                element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
             },
             // TODO:update item 
             {

@@ -52,6 +52,7 @@ const AuthProvider = ({ children }) => {
                     .then(res => {
                         if (res.data.token) {
                             localStorage.setItem('access_token', res.data.token)
+                                  setLoading(false)
                         }
                     })
 
@@ -59,12 +60,13 @@ const AuthProvider = ({ children }) => {
             else {
                 // TODO:Remove User From ClintSide
                 localStorage.removeItem('access_token')
+                      setLoading(false)
             }
 
 
 
             console.log('current User', currentUser)
-            setLoading(false)
+      
         })
         return () => {
             return unsubscribe()
