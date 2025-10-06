@@ -4,6 +4,8 @@ import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCart from "../../../hooks/useCart";
 import UseContext from "../../../hooks/useContext";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 const CheckOutForm = () => {
@@ -13,8 +15,9 @@ const CheckOutForm = () => {
     const axiosSecure = useAxiosSecure()
     const [clientSecret, setClientSecret] = useState('')
     const [paymentSuccess, setPaymentSuccess] = useState('')
-    const [cart] = useCart()
+    const [cart, refetch] = useCart()
     const { user } = UseContext()
+    const navigate = useNavigate()
     const totalPrice = cart.reduce((total, item) => total + item.price, 0)
     console.log(cart)
     useEffect(() => {
@@ -83,7 +86,12 @@ const CheckOutForm = () => {
                     status: "pending"
                 }
                 const res = await axiosSecure.post('/payment', payment)
-                console.log("payment save", res.data)
+                if (res.data.paymentResult.insertedId) {
+                    refetch()
+                    toast.success("your payment has success")
+                    navigate('/dashboard/paymentHistory')
+                }
+
             }
         }
     }

@@ -1,55 +1,92 @@
-import SectionTitle from "../../../components/sectionTitle/SectionTitle"
+import { useQuery } from "@tanstack/react-query";
+import SectionTitle from "../../../components/sectionTitle/SectionTitle";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import UseContext from "../../../hooks/useContext";
 
 const PaymentHistory = () => {
+    const { user } = UseContext();
+    const axiosSecure = useAxiosSecure();
+
+    const { data: payments = [] } = useQuery({
+        queryKey: ["payment", user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/payments/${user?.email}`);
+            return res.data;
+        },
+    });
+
     return (
         <>
+            <SectionTitle
+                subHeading="Your Payment History"
+                heading="Payment History"
+            ></SectionTitle>
 
-        <SectionTitle subHeading='Your Payment History' heading='Payment History'></SectionTitle>
-            <div className="max-w-6xl mx-auto mt-8 px-4">
-                <div className="bg-white shadow-md rounded-xl p-6 mb-6">
-                    <h2 className="text-lg sm:text-2xl font-bold text-gray-700 mb-6">TOTAL PAYMENT: 6</h2>
-                    {/* table section */}
-                    <div className="overflow-x-auto rounded-xl">
-                        <table className="table">
+            <div className="max-w-6xl mx-auto mt-10 px-4">
+                <div className="bg-white shadow-lg rounded-2xl p-8 mb-8 border border-gray-100">
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-700 mb-8 text-center">
+                        Total Payments:{" "}
+                        <span className="text-[#D1A054]">{payments?.length}</span>
+                    </h2>
+
+                    <div className="overflow-x-auto rounded-2xl border border-gray-200">
+                        <table className="table w-full border-collapse">
                             {/* head */}
-                            <thead className="bg-[#D1A054] text-white text-[16px]">
+                            <thead className="bg-[#D1A054] text-white text-sm sm:text-base uppercase">
                                 <tr>
-                                    <th>Email</th>
-                                    <th>Category</th>
-                                    <th>Total Price</th>
-                                    <th>Payment date</th>
+                                    <th className="py-4 px-6 text-left">Email</th>
+                                    <th className="py-4 px-6 text-left">Transaction ID</th>
+                                    <th className="py-4 px-6 text-center">Total Price</th>
+                                    <th className="py-4 px-6 text-center">Order Date</th>
+                                    <th className="py-4 px-6 text-center">Status</th>
                                 </tr>
                             </thead>
+
+                            {/* body */}
                             <tbody>
-                                {/* row 1 */}
-                                <tr>
-                                    <td>mirifat@gmail.com</td>
-                                    <td>Cy Ganderton</td>
-                                    <td>Quality Control Specialist</td>
-                                    <td>2025-06-08</td>
-                                </tr>
-                                {/* row 2 */}
-                                <tr className="hover:bg-base-300">
-                                    <td>mirifat@gmail.com</td>
-                                    <td>Hart Hagerty</td>
-                                    <td>Desktop Support Technician</td>
-                                    <td>2025-06-05</td>
-                                </tr>
-                                {/* row 3 */}
-                                <tr>
-                                    <td>mirifat@gmail.com</td>
-                                    <td>Brice Swyre</td>
-                                    <td>Tax Accountant</td>
-                                    <td>2025-08-05</td>
-                                </tr>
+                                {payments.map((item) => (
+                                    <tr
+                                        key={item._id}
+                                        className="border-t border-gray-100 hover:bg-gray-50 transition-all duration-200"
+                                    >
+                                        <td className="py-3 px-6 text-gray-700">{item.email}</td>
+                                        <td className="py-3 px-6 text-gray-700">
+                                            {item.TransactionId}
+                                        </td>
+                                        <td className="py-3 px-6 text-center font-semibold text-gray-800">
+                                            ${item.price}
+                                        </td>
+                                        <td className="py-3 px-6 text-center text-gray-600">
+                                            {new Date(item.date).toLocaleDateString()}
+                                        </td>
+                                        <td
+                                            className={`py-3 px-6 text-center font-medium ${item.status === "pending"
+                                                    ? "text-yellow-500"
+                                                    : "text-green-600"
+                                                }`}
+                                        >
+                                            {item.status}
+                                        </td>
+                                    </tr>
+                                ))}
+
+                                {payments.length === 0 && (
+                                    <tr>
+                                        <td
+                                            colSpan="5"
+                                            className="text-center py-6 text-gray-500 italic"
+                                        >
+                                            No payment history found
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
         </>
-    )
-}
+    );
+};
 
-export default PaymentHistory
+export default PaymentHistory;
