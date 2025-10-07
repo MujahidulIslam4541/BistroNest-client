@@ -19,6 +19,7 @@ import Payment from "../pages/Dashboard/payment/Payment";
 import Review from "../pages/Dashboard/Review.jsx/Review";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHOme";
+import Booking from "../pages/Dashboard/UserBooking/Booking";
 
 const router = createBrowserRouter([
     {
@@ -67,12 +68,16 @@ const router = createBrowserRouter([
                 element: <Payment></Payment>
             },
             {
-                path:'review',
-                element:<Review></Review>
+                path: 'review',
+                element: <Review></Review>
             },
             {
-                path:'userHome',
-                element:<UserHome></UserHome>
+                path: 'userHome',
+                element: <UserHome></UserHome>
+            },
+            {
+                path: 'booking',
+                element: <Booking></Booking>
             },
             {
             },
