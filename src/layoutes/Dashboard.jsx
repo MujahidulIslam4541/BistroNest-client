@@ -65,11 +65,11 @@ const Dashboard = () => {
                                 <FaHome /> User Home
                             </NavLink>
                         </li>
-                        <li>
+                        {/* <li>
                             <NavLink to='/dashboard/reservation' className={navLinkStyle}>
                                 <SlCalender /> Reservation
                             </NavLink>
-                        </li>
+                        </li> */}
                         <li>
                             <NavLink to='/dashboard/paymentHistory' className={navLinkStyle}>
                                 <MdPayments /> Payment History
