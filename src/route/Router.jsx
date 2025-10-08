@@ -20,6 +20,7 @@ import Review from "../pages/Dashboard/Review.jsx/Review";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHOme";
 import Booking from "../pages/Dashboard/UserBooking/Booking";
+import ManageReviews from "../pages/Dashboard/ManageReview/ManageReviews";
 
 const router = createBrowserRouter([
     {
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
             {
                 path: 'adminHome',
                 element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+            },
+            {
+                path: 'manageReviews',
+                element: <AdminRoute><ManageReviews></ManageReviews></AdminRoute>
             },
             // TODO:update item 
             {
