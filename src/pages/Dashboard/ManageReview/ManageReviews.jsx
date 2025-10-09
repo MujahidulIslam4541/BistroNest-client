@@ -1,11 +1,6 @@
 import { useState } from 'react';
+import SectionTitle from '../../../components/sectionTitle/SectionTitle';
 
-const SectionTitle = ({ heading, subHeading }) => (
-    <div className="text-center mb-8">
-        <h3 className="text-sm text-[#D1A054] uppercase tracking-wider mb-2">--- {subHeading} ---</h3>
-        <h2 className="text-4xl font-bold border-b-4 border-[#D1A054] inline-block pb-3">{heading}</h2>
-    </div>
-);
 
 const ManageReviews = () => {
     const [reviews, setReviews] = useState([
@@ -132,8 +127,8 @@ const ManageReviews = () => {
                             key={status}
                             onClick={() => setFilter(status)}
                             className={`px-6 py-2 rounded-lg font-medium transition capitalize ${filter === status
-                                    ? 'bg-[#D1A054] text-white shadow-md'
-                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                ? 'bg-[#D1A054] text-white shadow-md'
+                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                 }`}
                         >
                             {status}
@@ -212,10 +207,10 @@ const ManageReviews = () => {
                                             <td className="px-6 py-4 text-center">
                                                 <span
                                                     className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium capitalize ${review.status === "approved"
-                                                            ? "bg-green-100 text-green-700"
-                                                            : review.status === "rejected"
-                                                                ? "bg-red-100 text-red-700"
-                                                                : "bg-yellow-100 text-yellow-700"
+                                                        ? "bg-green-100 text-green-700"
+                                                        : review.status === "rejected"
+                                                            ? "bg-red-100 text-red-700"
+                                                            : "bg-yellow-100 text-yellow-700"
                                                         }`}
                                                 >
                                                     {review.status}
