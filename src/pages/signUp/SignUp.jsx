@@ -111,7 +111,7 @@ const SignUp = () => {
                                     />
                                 </div>
 
-                                <div>
+                                {/* <div>
                                     <label className="label">Photo URL</label>
                                     <input
                                         {...register("photo", { required: true })}
@@ -119,7 +119,7 @@ const SignUp = () => {
                                         className="input w-full bg-white"
                                         placeholder="Type here"
                                     />
-                                </div>
+                                </div> */}
 
                                 <div>
                                     <label className="label">Email</label>
