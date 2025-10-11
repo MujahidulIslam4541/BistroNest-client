@@ -3,11 +3,12 @@ import UseContext from './useContext'
 import { useNavigate } from 'react-router-dom'
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'https://bistro-nest-server.vercel.app'
 })
 const useAxiosSecure = () => {
     const { logOut } = UseContext()
     const navigation = useNavigate()
+    
 
     // 
     axiosSecure.interceptors.request.use(function (config) {
