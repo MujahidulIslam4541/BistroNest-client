@@ -1,13 +1,13 @@
 import axios from 'axios'
-import UseContext from './useContext'
-import { useNavigate } from 'react-router-dom'
+// import UseContext from './useContext'
+// import { useNavigate } from 'react-router-dom'
 
 const axiosSecure = axios.create({
-    baseURL: 'https://bistro-nest-server.vercel.app'
+    baseURL: 'http://localhost:3000'
 })
 const useAxiosSecure = () => {
-    const { logOut } = UseContext()
-    const navigation = useNavigate()
+    // const { logOut } = UseContext()
+    // const navigation = useNavigate()
     
 
     // 
@@ -24,20 +24,20 @@ const useAxiosSecure = () => {
 
 
     // Interceptors 401 and 403 status
-    axiosSecure.interceptors.response.use((config) => {
-        return config;
-    },
-        async (error) => {
-            const status = error.response?.status;
-            console.log("status in the interceptors", status)
-            if (status === 401 || status == 403) {
-                await logOut();
-                navigation('/signIn')
-            }
-            return Promise.reject(error)
-        }
-    )
-    return axiosSecure;
+    // axiosSecure.interceptors.response.use((config) => {
+    //     return config;
+    // },
+    //     async (error) => {
+    //         const status = error.response?.status;
+    //         console.log("status in the interceptors", status)
+    //         if (status === 401 || status == 403) {
+    //             await logOut();
+    //             navigation('/signIn')
+    //         }
+    //         return Promise.reject(error)
+    //     }
+    // )
+    // return axiosSecure;
 }
 
 export default useAxiosSecure
