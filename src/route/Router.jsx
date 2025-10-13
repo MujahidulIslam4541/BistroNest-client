@@ -21,6 +21,7 @@ import UserHome from "../pages/Dashboard/UserHome/UserHome";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHOme";
 import Booking from "../pages/Dashboard/UserBooking/Booking";
 import ManageReviews from "../pages/Dashboard/ManageReview/ManageReviews";
+import ManageBookings from "../pages/Dashboard/ManageBooking/ManageBooking";
 
 const router = createBrowserRouter([
     {
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
             {
                 path: 'manageReviews',
                 element: <AdminRoute><ManageReviews></ManageReviews></AdminRoute>
+            },
+            {
+                path: 'manageBooking',
+                element: <AdminRoute><ManageBookings></ManageBookings></AdminRoute>
             },
             // TODO:update item 
             {
