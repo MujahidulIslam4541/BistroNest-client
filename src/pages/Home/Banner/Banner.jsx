@@ -39,8 +39,11 @@
 
 
 import { FaUtensils, FaClock, FaMapMarkerAlt } from 'react-icons/fa'
+import UseContext from '../../../hooks/useContext'
+import { Link } from 'react-router-dom'
 
 export default function Banner() {
+  const { user } = UseContext()
   return (
     <div className="min-h-screen bg-white">
       {/* Banner Section */}
@@ -78,18 +81,19 @@ export default function Banner() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <button
+            <Link to='/menu'
               className="px-10 py-4 text-lg font-semibold text-white rounded-lg transition-all hover:shadow-2xl transform hover:scale-105"
               style={{ backgroundColor: '#D1A054' }}
             >
               Explore Menu
-            </button>
-            <button
+            </Link>
+
+            <Link to={user?.email ? '/dashboard/booking' : '/signIn'}
               className="px-10 py-4 text-lg font-semibold text-white rounded-lg border-2 transition-all hover:bg-white/10"
               style={{ borderColor: '#D1A054' }}
             >
               Book a Table
-            </button>
+            </Link>
           </div>
 
           {/* Info Cards */}
