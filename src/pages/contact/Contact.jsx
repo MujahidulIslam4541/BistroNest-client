@@ -78,7 +78,7 @@ export default function ContactPage() {
                             <div className="text-center py-12">
                                 <FaCheckCircle className="w-20 h-20 text-green-500 mx-auto mb-4" />
                                 <h4 className="text-2xl font-bold text-gray-800 mb-2">Thank You!</h4>
-                                <p className="text-gray-600">Your Message succesfylly sent.</p>
+                                <p className="text-gray-600">Your Message successfully sent.</p>
                             </div>
                         ) : (
                             <div className="space-y-5">
