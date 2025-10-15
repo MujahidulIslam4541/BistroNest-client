@@ -1,20 +1,35 @@
-import { Navigate, useLocation } from 'react-router-dom'
-import useAdmin from '../hooks/useAdmin'
-import UseContext from '../hooks/useContext'
-import Loader from '../components/loader/Loader'
+import { Navigate, useLocation } from 'react-router-dom';
+import useAdmin from '../hooks/useAdmin';
+import UseContext from '../hooks/useContext';
+import Loader from '../components/loader/Loader';
+import { useEffect, useState } from 'react';
 
 const AdminRoute = ({ children }) => {
-    const { user, loading } = UseContext()
-    const [isAdmin, isAdminLoading] = useAdmin()
-    const location = useLocation()
+    const { user, loading, logOut } = UseContext();
+    const [isAdmin, isAdminLoading] = useAdmin();
+    const location = useLocation();
+    const [redirect, setRedirect] = useState(false);
+
+    useEffect(() => {
+        if (!loading && !isAdminLoading) {
+            if (!user || !isAdmin) {
+                logOut();  
+                setRedirect(true);  
+            }
+        }
+    }, [loading, isAdminLoading, user, isAdmin, logOut]);
+
     if (loading || isAdminLoading) {
-        return <Loader></Loader>
+        return <Loader />;
     }
 
-    if (user && isAdmin) {
-        return children;
+    if (redirect) {
+        return <Navigate to="/signIn" state={{ from: location }} replace />;
     }
-    return <Navigate to='/signIn' state={{ from: location }} replace></Navigate>
-}
 
-export default AdminRoute
+    return children;
+};
+
+export default AdminRoute;
+
+

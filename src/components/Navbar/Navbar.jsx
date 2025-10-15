@@ -77,7 +77,7 @@ const Navbar = () => {
       <div className="navbar-end space-x-4 items-center">
         {/* Cart Icon */}
         <div className="relative">
-          <Link>
+          <Link to={user&& !isAdmin ?'/dashboard/cart':''}>
             <FaCartPlus className="text-2xl text-white hover:text-yellow-400 cursor-pointer" />
             {!isAdmin && user && (
               <span className="absolute -top-2 -right-2 text-xs bg-red-500 text-white px-1.5 py-0.5 rounded-full min-w-[20px] text-center">
