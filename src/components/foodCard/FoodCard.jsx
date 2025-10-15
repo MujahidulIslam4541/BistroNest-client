@@ -8,7 +8,7 @@ import useCart from "../../hooks/useCart";
 
 
 const FoodCard = ({ item }) => {
-    const { user } = UseContext()
+const { user } = UseContext()
     const navigate = useNavigate()
     const location = useLocation()
     const axiosSecure = useAxiosSecure()
@@ -28,27 +28,46 @@ const FoodCard = ({ item }) => {
             axiosSecure.post('/cart', cartItem)
                 .then(res => {
                     if (res.data.insertedId) {
-                        toast.success(`Great choice! ${name} is now in your cart 🛍️`);
+                        toast.success(`${name} added to cart! 🛒`, {
+                            duration: 3000,
+                            style: {
+                                background: '#D1A054',
+                                color: '#fff',
+                                padding: '16px',
+                                borderRadius: '12px',
+                                fontWeight: '600',
+                            },
+                            iconTheme: {
+                                primary: '#fff',
+                                secondary: '#D1A054',
+                            },
+                        });
                         refetch()
                     }
                 })
         }
         else {
             Swal.fire({
-                title: "Login Required",
-                text: "To add items to your cart, please log in to your account first.",
+                title: "🔐 Login Required",
+                html: "<p style='color: #666; font-size: 15px;'>Please log in to add items to your cart and enjoy a seamless shopping experience!</p>",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, Log In",
-                cancelButtonText: "Cancel"
+                confirmButtonColor: "#D1A054",
+                cancelButtonColor: "#6B7280",
+                confirmButtonText: "Login Now",
+                cancelButtonText: "Maybe Later",
+                background: '#fff',
+                customClass: {
+                    popup: 'rounded-2xl',
+                    title: 'text-2xl font-bold',
+                    confirmButton: 'px-6 py-3 rounded-xl font-semibold',
+                    cancelButton: 'px-6 py-3 rounded-xl font-semibold'
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
                     navigate('/signIn', { state: { from: location } })
                 }
             });
-
         }
     }
     return (
