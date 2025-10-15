@@ -23,6 +23,7 @@ import Booking from "../pages/Dashboard/UserBooking/Booking";
 import ManageReviews from "../pages/Dashboard/ManageReview/ManageReviews";
 import ManageBookings from "../pages/Dashboard/ManageBooking/ManageBooking";
 import ManageOrders from "../pages/Dashboard/ManageOrders/ManageOrders";
+import ContactPage from "../pages/contact/Contact";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: 'menu',
                 element: <Menu></Menu>
+            },
+            {
+                path: 'contact',
+                element: <ContactPage></ContactPage>
             },
             {
                 path: 'shope/:category',
