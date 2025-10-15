@@ -147,9 +147,6 @@ const UserHome = () => {
                             >
                                 Edit Profile
                             </button>
-                            <button className="px-6 py-3 bg-gray-50 text-gray-700 rounded-xl font-semibold hover:bg-gray-100 transition border border-gray-200">
-                                View Activity
-                            </button>
                         </div>
                     </div>
                 </div>
