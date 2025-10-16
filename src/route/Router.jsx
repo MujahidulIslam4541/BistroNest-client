@@ -24,6 +24,7 @@ import ManageReviews from "../pages/Dashboard/ManageReview/ManageReviews";
 import ManageBookings from "../pages/Dashboard/ManageBooking/ManageBooking";
 import ManageOrders from "../pages/Dashboard/ManageOrders/ManageOrders";
 import ContactPage from "../pages/contact/Contact";
+import AllBooking from "../pages/Dashboard/getAllBooking/AllBooking";
 
 const router = createBrowserRouter([
     {
@@ -84,8 +85,12 @@ const router = createBrowserRouter([
                 element: <UserHome></UserHome>
             },
             {
-                path: 'booking',
+                path: 'AddBooking',
                 element: <Booking></Booking>
+            },
+            {
+                path: 'booking',
+                element: <AllBooking></AllBooking>
             },
             {
             },

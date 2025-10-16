@@ -24,8 +24,6 @@ const Booking = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
-
         const bookingData = {
             ...formData,
             status: "pending"  

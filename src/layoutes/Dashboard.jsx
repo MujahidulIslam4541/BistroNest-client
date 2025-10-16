@@ -94,12 +94,17 @@ const Dashboard = () => {
                                 </NavLink>
                             </li>
                             <li>
+                                <NavLink to='/dashboard/booking' className={navLinkStyle}>
+                                   <MdLibraryBooks /> My Bookings
+                                </NavLink>
+                            </li>
+                            <li>
                                 <NavLink to='/dashboard/review' className={navLinkStyle}>
                                     <MdOutlineReviews /> Review
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to='/dashboard/booking' className={navLinkStyle}>
+                                <NavLink to='/dashboard/AddBooking' className={navLinkStyle}>
                                     <MdLibraryBooks /> Booking
                                 </NavLink>
                             </li>
