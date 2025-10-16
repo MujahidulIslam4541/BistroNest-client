@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { FaShoppingCart, FaStar, FaCalendarCheck, FaTimes, FaCamera } from "react-icons/fa";
 import UseContext from '../../../hooks/useContext';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const UserHome = () => {
-    const { user } = UseContext();
+    const { user, logOut } = UseContext();
+    const navigate = useNavigate()
 
     const totalOrders = 12;
     const totalReviews = 5;
@@ -78,6 +80,12 @@ const UserHome = () => {
         }
     };
 
+    const handleLogOut = () => {
+        logOut()
+        navigate('/signIn')
+
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 px-4 py-10">
             <div className="max-w-6xl mx-auto">
@@ -147,6 +155,8 @@ const UserHome = () => {
                             >
                                 Edit Profile
                             </button>
+
+                            <button onClick={user?handleLogOut:''} className="px-6 py-3 bg-gradient-to-r from-yellow-600 to-amber-600 text-white rounded-xl font-semibold hover:from-yellow-700 hover:to-amber-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"> LogOut</button>
                         </div>
                     </div>
                 </div>
