@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { FaPhoneAlt, FaMapMarkerAlt, FaClock, FaUtensils, FaCalendarAlt, FaUsers } from "react-icons/fa";
 import SectionTitle from "../../../components/sectionTitle/SectionTitle";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
 
 const Booking = () => {
+    const axiosSecure = useAxiosSecure()
     const [formData, setFormData] = useState({
         date: "",
         time: "",
@@ -19,10 +22,18 @@ const Booking = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(formData);
-        alert("✅ Reservation confirmed successfully!");
+
+        const bookingData = {
+            ...formData,
+            status: "pending"  
+        };
+        const res = await axiosSecure.post('/booking',  bookingData )
+        if (res.data.insertedId) {
+            toast.success("your booking is complete and pending approval")
+        }
         setFormData({
             date: "",
             time: "",
