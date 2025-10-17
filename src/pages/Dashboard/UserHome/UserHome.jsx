@@ -3,14 +3,24 @@ import { FaShoppingCart, FaStar, FaCalendarCheck, FaTimes, FaCamera } from "reac
 import UseContext from '../../../hooks/useContext';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import Loader from '../../../components/loader/Loader';
 
 const UserHome = () => {
     const { user, logOut } = UseContext();
     const navigate = useNavigate()
+    const axiosSecure = useAxiosSecure()
 
-    const totalOrders = 12;
-    const totalReviews = 5;
-    const totalBookings = 3;
+    const { data: userState = {}, isLoading } = useQuery({
+        queryKey: ["payment", user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/userState`);
+            return res.data;
+        },
+    });
+
+    if (isLoading) <Loader></Loader>
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
@@ -97,7 +107,7 @@ const UserHome = () => {
                             <FaShoppingCart className="text-4xl text-yellow-700" />
                         </div>
                         <h3 className="text-lg font-semibold text-gray-700">Total Orders</h3>
-                        <p className="text-5xl font-bold mt-2 bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">{totalOrders}</p>
+                        <p className="text-5xl font-bold mt-2 bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">{userState?.orders || 0}</p>
                     </div>
 
                     {/* Reviews */}
@@ -106,7 +116,7 @@ const UserHome = () => {
                             <FaStar className="text-4xl text-yellow-700" />
                         </div>
                         <h3 className="text-lg font-semibold text-gray-700">Total Reviews</h3>
-                        <p className="text-5xl font-bold mt-2 bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">{totalReviews}</p>
+                        <p className="text-5xl font-bold mt-2 bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">{userState?.reviews || 0}</p>
                     </div>
 
                     {/* Bookings */}
@@ -115,7 +125,7 @@ const UserHome = () => {
                             <FaCalendarCheck className="text-4xl text-yellow-700" />
                         </div>
                         <h3 className="text-lg font-semibold text-gray-700">Total Bookings</h3>
-                        <p className="text-5xl font-bold mt-2 bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">{totalBookings}</p>
+                        <p className="text-5xl font-bold mt-2 bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">{userState?.bookings || 0}</p>
                     </div>
                 </div>
 
@@ -156,7 +166,7 @@ const UserHome = () => {
                                 Edit Profile
                             </button>
 
-                            <button onClick={user?handleLogOut:''} className="px-6 py-3 bg-gradient-to-r from-yellow-600 to-amber-600 text-white rounded-xl font-semibold hover:from-yellow-700 hover:to-amber-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"> LogOut</button>
+                            <button onClick={user ? handleLogOut : ''} className="px-6 py-3 bg-gradient-to-r from-yellow-600 to-amber-600 text-white rounded-xl font-semibold hover:from-yellow-700 hover:to-amber-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"> LogOut</button>
                         </div>
                     </div>
                 </div>
