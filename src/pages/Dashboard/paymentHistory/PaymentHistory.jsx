@@ -82,15 +82,20 @@ const PaymentHistory = () => {
                                                 {item?.date ? new Date(item.date).toLocaleDateString() : "N/A"}
                                             </td>
                                             <td className={`py-3 px-6 text-center font-medium ${item?.status === "pending" ? "text-yellow-500" : "text-green-600"}`}>
-                                                {item?.status || "success"}
+                                                {item?.status || "confirmed"}
                                             </td>
                                             <td className="py-3 px-6 text-center">
-                                                <button
+                                                {item?.status === "confirmed" ? <button
+                                                    disabled
+                                                    className="whitespace-nowrap bg-gray-400 text-white font-semibold px-3 py-2 rounded-lg shadow-md "
+                                                >
+                                                    Cancel Order
+                                                </button> : <button
                                                     onClick={() => openConfirmModal(item?._id)}
                                                     className="whitespace-nowrap bg-[#D1A054] text-white font-semibold px-3 py-2 rounded-lg shadow-md hover:bg-yellow-600 hover:shadow-lg transition-all duration-300"
                                                 >
                                                     Cancel Order
-                                                </button>
+                                                </button>}
                                             </td>
                                         </tr>
                                     ))
