@@ -90,7 +90,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'booking',
-                element: <AllBooking></AllBooking>
+                element:<AllBooking></AllBooking>
             },
             {
             },
