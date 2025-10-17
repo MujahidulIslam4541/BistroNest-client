@@ -1,85 +1,103 @@
-import React, { useEffect, useState } from 'react'
-
-// ManageOrders.jsx — Admin dashboard page for managing orders (BistroNest)
-// Simple, clean, and user-friendly — minimal and focused.
+import { MdDeleteForever } from 'react-icons/md';
+import SectionTitle from '../../../components/sectionTitle/SectionTitle';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
 export default function ManageOrders() {
-    const [orders, setOrders] = useState([])
-    const [loading, setLoading] = useState(true)
+    const axiosSecure = useAxiosSecure();
 
-    useEffect(() => {
-        // Replace with your API call
-        setLoading(true)
-        setTimeout(() => {
-            setOrders([
-                { id: 'ORD-101', name: 'John Doe', email: 'john@example.com', total: 58, status: 'Pending', date: '2025-10-10' },
-                { id: 'ORD-102', name: 'Sarah Ali', email: 'sarah@example.com', total: 72, status: 'Delivered', date: '2025-10-11' },
-                { id: 'ORD-103', name: 'Imran Khan', email: 'imran@example.com', total: 45, status: 'Cancelled', date: '2025-10-12' }
-            ])
-            setLoading(false)
-        }, 400)
-    }, [])
 
-    const updateStatus = (id, newStatus) => {
-        setOrders(prev => prev.map(o => o.id === id ? { ...o, status: newStatus } : o))
-    }
 
-    const handleDelete = id => {
-        if (confirm('Delete this order?')) {
-            setOrders(prev => prev.filter(o => o.id !== id))
-        }
-    }
+    const { data: orders = [] } = useQuery({
+        queryKey: ["manageOrderAdmin"],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/payments`);
+            return Array.isArray(res.data) ? res.data : [];
+        },
+        initialData: [],
+    });
+
+
+    console.log(orders)
+
+
+
+
 
     return (
         <div className="p-6">
-            <h2 className="text-2xl font-semibold mb-4">Manage Orders</h2>
+            <SectionTitle heading="Manage Orders" subHeading="Manage All Orders"></SectionTitle>
 
-            <div className="overflow-x-auto bg-base-100 rounded-lg shadow">
-                <table className="table w-full">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Customer</th>
-                            <th>Total ($)</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                            <th className="text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {loading ? (
-                            <tr><td colSpan={6} className="text-center py-8">Loading orders...</td></tr>
-                        ) : orders.length === 0 ? (
-                            <tr><td colSpan={6} className="text-center py-8">No orders found.</td></tr>
-                        ) : (
-                            orders.map(order => (
-                                <tr key={order.id}>
-                                    <td>{order.id}</td>
-                                    <td>
-                                        <div className="font-medium">{order.name}</div>
-                                        <div className="text-xs opacity-70">{order.email}</div>
-                                    </td>
-                                    <td>{order.total}</td>
-                                    <td>
-                                        <span className={`badge badge-sm ${order.status === 'Delivered' ? 'badge-success' : order.status === 'Cancelled' ? 'badge-error' : 'badge-warning'}`}>{order.status}</span>
-                                    </td>
-                                    <td>{order.date}</td>
-                                    <td className="text-right">
-                                        <div className="flex justify-end gap-2">
-                                            {order.status !== 'Delivered' && (
-                                                <button onClick={() => updateStatus(order.id, 'Delivered')} className="btn btn-xs btn-primary">Deliver</button>
-                                            )}
-                                            {order.status !== 'Cancelled' && (
-                                                <button onClick={() => updateStatus(order.id, 'Cancelled')} className="btn btn-xs btn-outline">Cancel</button>
-                                            )}
-                                            <button onClick={() => handleDelete(order.id)} className="btn btn-xs btn-error">Delete</button>
-                                        </div>
+
+            <div className="max-w-6xl mx-auto mt-8 px-4">
+                <div className="bg-white shadow-md rounded-xl p-6 mb-6">
+                    <h2 className="text-lg sm:text-2xl font-bold text-gray-700 mb-6">
+                        TOTAL ORDERS: {orders?.length}
+                    </h2>
+
+                    <div className="overflow-x-auto rounded-xl">
+                        <table className="table">
+                            <thead className="bg-[#D1A054] text-white text-[16px]">
+                                <tr>
+                                    <th>E-mail</th>
+                                    <th>TransactionId</th>
+                                    <th>Price</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr className="hover:bg-gray-100">
+                                    <td>mirifat4541@gmail.com</td>
+                                    <td>pk-54584558</td>
+                                    <td>$12</td>
+                                    <td>10-12-25</td>
+                                    <td className="text-center">
+                                        <select name="" id="">
+                                            <option value="pending">pending</option>
+                                            <option value="processing">processing</option>
+                                            <option value="delivered">delivered</option>
+                                            <option value="canceled">canceled</option>
+                                        </select>
                                     </td>
                                 </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {/* Pagination */}
+                    {/* {usersData.pages > 1 && (
+                        <div className="flex justify-center items-center mt-4 gap-2">
+                            <button
+                                onClick={() => goToPage(Math.max(currentPage - 1, 1))}
+                                disabled={currentPage === 1}
+                                className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300"
+                            >
+                                Previous
+                            </button>
+
+                            {[...Array(usersData.pages)].map((_, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => goToPage(idx + 1)}
+                                    className={`px-3 py-1 rounded ${currentPage === idx + 1 ? 'bg-[#D1A054] text-white' : 'bg-gray-200 hover:bg-gray-300'}`}
+                                >
+                                    {idx + 1}
+                                </button>
+                            ))}
+
+                            <button
+                                onClick={() => goToPage(Math.min(currentPage + 1, usersData.pages))}
+                                disabled={currentPage === usersData.pages}
+                                className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300"
+                            >
+                                Next
+                            </button>
+                        </div>
+                    )} */}
+                </div>
             </div>
         </div>
     )

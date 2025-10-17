@@ -18,7 +18,7 @@ const PaymentHistory = () => {
         queryKey: ["payment", user?.email],
         enabled: !!user?.email,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/payments/${user?.email}`);
+            const res = await axiosSecure.get(`/payments`);
             return Array.isArray(res.data) ? res.data : [];
         },
         initialData: [],
@@ -85,7 +85,7 @@ const PaymentHistory = () => {
                                                 {item?.status || "confirmed"}
                                             </td>
                                             <td className="py-3 px-6 text-center">
-                                                {item?.status === "confirmed" ? <button
+                                                {item?.status === "processing"|| item?.status === "confirmed"? <button
                                                     disabled
                                                     className="whitespace-nowrap bg-gray-400 text-white font-semibold px-3 py-2 rounded-lg shadow-md "
                                                 >

@@ -27,10 +27,9 @@ const UserHome = () => {
 
     // Fetch payment data
     const { data: payments = [] } = useQuery({
-        queryKey: ["payments", user?.email],
-        enabled: !!user?.email,
+        queryKey: ["payments", ],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/payments/${user?.email}`);
+            const res = await axiosSecure.get(`/payments`);
             return Array.isArray(res.data) ? res.data : [];
         },
         initialData: [],
