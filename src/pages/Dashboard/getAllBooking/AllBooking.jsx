@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 import SectionTitle from "../../../components/sectionTitle/SectionTitle"
 import useAxiosSecure from "../../../hooks/useAxiosSecure"
 import { FaTrashAlt, FaCalendarAlt, FaTimes, FaExclamationTriangle } from "react-icons/fa";
+import Loader from "../../../components/loader/Loader";
 
 const AllBooking = () => {
     const axiosSecure = useAxiosSecure()
@@ -55,15 +56,11 @@ const AllBooking = () => {
     }
 
     if (isLoading) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2" style={{ borderColor: '#D1A054' }}></div>
-            </div>
-        )
+        return <Loader></Loader>
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 py-8 px-4">
+        <div className="min-h-screen bg-gray-50 py-8 ">
             <div className="max-w-7xl mx-auto">
                 <SectionTitle
                     heading="My All Bookings"

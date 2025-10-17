@@ -40,7 +40,7 @@ const Cart = () => {
     return (
         <>
             <Helmet>BistroNest || Cart</Helmet>
-            
+
             <SectionTitle subHeading='Your Cart' heading='Selected Items'></SectionTitle>
 
             <div className="max-w-6xl mx-auto mt-8 px-4">
@@ -101,6 +101,14 @@ const Cart = () => {
                                 ))}
                             </tbody>
                         </table>
+
+                        {cart?.length === 0 && (
+                            <p
+                                className="text-center  py-6 text-gray-500 italic"
+                            >
+                                Your cart is empty
+                            </p>
+                        )}
                     </div>
                 </div>
             </div>
