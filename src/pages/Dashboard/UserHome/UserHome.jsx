@@ -20,6 +20,18 @@ const UserHome = () => {
         },
     });
 
+
+    const { data: payments = [] } = useQuery({
+        queryKey: ["userState", user?.email],
+        enabled: !!user?.email,
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/payments/${user?.email}`);
+            return Array.isArray(res.data) ? res.data : [];
+        },
+        initialData: [],
+    });
+
+
     if (isLoading) <Loader></Loader>
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -107,7 +119,7 @@ const UserHome = () => {
                             <FaShoppingCart className="text-4xl text-yellow-700" />
                         </div>
                         <h3 className="text-lg font-semibold text-gray-700">Total Orders</h3>
-                        <p className="text-5xl font-bold mt-2 bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">{userState?.orders || 0}</p>
+                        <p className="text-5xl font-bold mt-2 bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">{payments?.length || 0}</p>
                     </div>
 
                     {/* Reviews */}
