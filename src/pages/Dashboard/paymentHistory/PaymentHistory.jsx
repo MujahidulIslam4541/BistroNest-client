@@ -82,10 +82,10 @@ const PaymentHistory = () => {
                                                 {item?.date ? new Date(item.date).toLocaleDateString() : "N/A"}
                                             </td>
                                             <td className={`py-3 px-6 text-center font-medium ${item?.status === "pending" ? "text-yellow-500" : "text-green-600"}`}>
-                                                {item?.status || "confirmed"}
+                                                {item?.status || "delivered"}
                                             </td>
                                             <td className="py-3 px-6 text-center">
-                                                {item?.status === "processing"|| item?.status === "confirmed"? <button
+                                                {item?.status === "canceled"|| item?.status === "delivered"? <button
                                                     disabled
                                                     className="whitespace-nowrap bg-gray-400 text-white font-semibold px-3 py-2 rounded-lg shadow-md "
                                                 >

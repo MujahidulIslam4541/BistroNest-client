@@ -59,7 +59,13 @@ export default function ManageOrders() {
               </thead>
               <tbody>
                 {orders?.map((order) => (
-                  <tr key={order._id} className="hover:bg-gray-50">
+                  <tr key={order._id} className={` ${
+                      order?.status === "delivered"
+                        ? "bg-green-100 text-green-700"
+                        : order?.status === "canceled"
+                        ? "bg-red-100 text-red-700"
+                        : "hover:bg-gray-50"
+                    }`}>
                     <td>{order?.email}</td>
                     <td>{order?.TransactionId}</td>
                     <td>${order?.price}</td>
