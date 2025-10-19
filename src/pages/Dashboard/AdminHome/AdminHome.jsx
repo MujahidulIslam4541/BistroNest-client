@@ -1,31 +1,31 @@
 import { FaDollarSign, FaUsers, FaBoxOpen, FaShoppingCart } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Legend } from 'recharts';
-import { PieChart, Pie, Tooltip, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
+import { PieChart, Pie, Tooltip, ResponsiveContainer } from "recharts";
 import UseContext from "../../../hooks/useContext";
 
-const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8B5CF6', '#EC4899'];
-const COLORS = ['#8B5CF6', '#EC4899', '#F59E0B', '#10B981', '#3B82F6', '#EF4444'];
+const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8B5CF6", "#EC4899"];
+const COLORS = ["#8B5CF6", "#EC4899", "#F59E0B", "#10B981", "#3B82F6", "#EF4444"];
 
 const AdminHome = () => {
   const { user } = UseContext();
   const axiosSecure = useAxiosSecure();
 
   const { data: states = {} } = useQuery({
-    queryKey: ['adminHome'],
+    queryKey: ["adminHome"],
     queryFn: async () => {
-      const res = await axiosSecure.get('/admin-state');
+      const res = await axiosSecure.get("/admin-state");
       return res.data;
-    }
+    },
   });
 
   const { data: chartData = [] } = useQuery({
-    queryKey: ['order-state'],
+    queryKey: ["order-state"],
     queryFn: async () => {
-      const res = await axiosSecure.get('/order-state');
+      const res = await axiosSecure.get("/order-state");
       return res.data;
-    }
+    },
   });
 
   const getPath = (x, y, width, height) => {
@@ -47,22 +47,27 @@ const AdminHome = () => {
     const y = cy + radius * Math.sin(-(midAngle ?? 0) * RADIAN);
 
     return (
-      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" className="text-sm font-semibold">
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+        className="text-sm font-semibold"
+      >
         {`${((percent ?? 0) * 100).toFixed(0)}%`}
       </text>
     );
   };
 
-  const piChartData = chartData.map(data => ({
+  const piChartData = chartData.map((data) => ({
     name: data.category,
-    value: data.revenue
+    value: data.revenue,
   }));
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <h2 className="text-3xl font-bold mb-8 text-gray-800">
-        Hi! Welcome Back {user?.displayName}
-      </h2>
+      <h2 className="text-3xl font-bold mb-8 text-gray-800">Hi! Welcome Back {user?.displayName}</h2>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
@@ -113,29 +118,40 @@ const AdminHome = () => {
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-        {/* Bar Chart */}
-        <div className="">
+
+        {/* Bar Chart  */}
+        <div className="w-full">
           <h3 className="text-xl font-bold text-gray-800 mb-4">Orders by Category</h3>
-          <BarChart
-            width={500}
-            height={300}
-            data={chartData}
-            margin={{
-              top: 20,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="category" />
-            <YAxis />
-            <Bar dataKey="quantity" fill="#8884d8" shape={<TriangleBar />} label={{ position: 'top' }}>
-              {chartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
-              ))}
-            </Bar>
-          </BarChart>
+          <div className="flex justify-center">
+            <ResponsiveContainer width="100%" height={350}>
+              <BarChart
+                data={chartData}
+                margin={{
+                  top: 20,
+                  right: 30,
+                  left: 0,
+                  bottom: 5,
+                }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="category" />
+                <YAxis />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    border: "none",
+                    borderRadius: "12px",
+                    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                  }}
+                />
+                <Bar dataKey="quantity" fill="#8884d8" shape={<TriangleBar />} label={{ position: "top" }}>
+                  {chartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         </div>
 
         {/* Pie Chart */}
@@ -158,19 +174,15 @@ const AdminHome = () => {
                     <Cell key={`cell-${entry.name}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: '#fff', 
-                    border: 'none', 
-                    borderRadius: '12px',
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                  }} 
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    border: "none",
+                    borderRadius: "12px",
+                    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                  }}
                 />
-                <Legend 
-                  verticalAlign="bottom" 
-                  height={36}
-                  iconType="circle"
-                />
+                <Legend verticalAlign="bottom" height={36} iconType="circle" />
               </PieChart>
             </ResponsiveContainer>
           </div>
