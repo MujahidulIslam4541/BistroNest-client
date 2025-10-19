@@ -1,7 +1,7 @@
 
 const SectionTitle = ({ heading, subHeading }) => {
     return (
-        <div className='w-11/12 md:w-5/12 lg:w-4/12 mx-auto text-center my-12 md:my-16'>
+        <div className='w-11/12 md:w-5/12 lg:w-5/12 mx-auto text-center my-6 md:my-6'>
             {/* SubHeading with decorative elements */}
             <div className='flex items-center justify-center gap-3 mb-4'>
                 <div className='w-8 h-[2px] bg-gradient-to-r from-transparent to-[#DB9F12]'></div>

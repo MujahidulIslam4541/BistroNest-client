@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import SectionTitle from "../../../components/sectionTitle/SectionTitle";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -7,19 +8,25 @@ import Loader from "../../../components/loader/Loader";
 
 export default function ManageOrders() {
   const axiosSecure = useAxiosSecure();
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 15; // প্রতি পেজে 15 টা ডাটা
 
+  // Fetch payments with pagination
   const {
-    data: orders = [],
+    data: paymentData = {},
     refetch,
     isLoading,
   } = useQuery({
-    queryKey: ["manageOrderAdmin"],
+    queryKey: ["manageOrderAdmin", currentPage],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/payments`);
-      return Array.isArray(res.data) ? res.data : [];
+      const res = await axiosSecure.get(`/payments?page=${currentPage}&limit=${limit}`);
+      return res.data?.data || {};
     },
-    initialData: [],
   });
+
+  const orders = paymentData.result || [];
+  const total = paymentData.total || 0;
+  const pages = paymentData.pages || 1;
 
   const handleStatusChange = async (id, newStatus) => {
     try {
@@ -40,16 +47,19 @@ export default function ManageOrders() {
 
   return (
     <div className="p-6">
-      <SectionTitle heading="Manage Orders" subHeading="Manage All Orders"></SectionTitle>
+      <SectionTitle heading="Manage Orders" subHeading="Manage All Orders" />
 
       <div className="max-w-6xl mx-auto mt-8 px-4">
         <div className="bg-white shadow-md rounded-xl p-6 mb-6">
-          <h2 className="text-lg sm:text-2xl font-bold text-gray-700 mb-6">TOTAL ORDERS: {orders?.length}</h2>
+          <h2 className="text-lg sm:text-2xl font-bold text-gray-700 mb-6">
+            TOTAL ORDERS: {total}
+          </h2>
 
           <div className="overflow-x-auto rounded-xl">
             <table className="table">
               <thead className="bg-[#D1A054] text-white text-[16px]">
                 <tr>
+                  <th>#</th>
                   <th>E-mail</th>
                   <th>Transaction ID</th>
                   <th>Price</th>
@@ -58,19 +68,28 @@ export default function ManageOrders() {
                 </tr>
               </thead>
               <tbody>
-                {orders?.map((order) => (
-                  <tr key={order._id} className={` ${
+                {orders.map((order,index) => (
+                  <tr
+                    key={order._id}
+                    className={`${
                       order?.status === "delivered"
                         ? "bg-green-100 text-green-700"
                         : order?.status === "canceled"
                         ? "bg-red-100 text-red-700"
+                        : order?.status === "processing"
+                        ? "bg-yellow-100 text-yellow-700"
                         : "hover:bg-gray-50"
-                    }`}>
+                    }`}
+                  >
+                    <td>{index+1}</td>
                     <td>{order?.email}</td>
                     <td>{order?.TransactionId}</td>
                     <td>${order?.price}</td>
-                    <td>{order?.date ? order.date.slice(0, 10).split("-").reverse().join("/") : "-"}</td>
-
+                    <td>
+                      {order?.date
+                        ? order.date.slice(0, 10).split("-").reverse().join("/")
+                        : "-"}
+                    </td>
                     <td className="text-center">
                       <select
                         className={`select select-sm rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D1A054] transition-all duration-200
@@ -84,8 +103,13 @@ export default function ManageOrders() {
                               : "bg-gray-100 text-gray-700"
                           }`}
                         value={order?.status || "pending"}
-                        onChange={(e) => handleStatusChange(order?._id, e.target.value)}
-                        disabled={order?.status === "delivered" || order?.status === "canceled"}
+                        onChange={(e) =>
+                          handleStatusChange(order?._id, e.target.value)
+                        }
+                        disabled={
+                          order?.status === "delivered" ||
+                          order?.status === "canceled"
+                        }
                       >
                         <option value="pending" disabled>
                           Pending
@@ -99,6 +123,39 @@ export default function ManageOrders() {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Pagination Controls */}
+          <div className="flex justify-center items-center gap-2 mt-6">
+            <button
+              className="px-3 py-1 bg-[#D1A054] text-white rounded-md disabled:opacity-50"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+            >
+              Prev
+            </button>
+
+            {[...Array(pages).keys()].map((num) => (
+              <button
+                key={num}
+                onClick={() => setCurrentPage(num + 1)}
+                className={`px-3 py-1 rounded-md ${
+                  currentPage === num + 1
+                    ? "bg-[#D1A054] text-white"
+                    : "bg-gray-200 text-gray-700"
+                }`}
+              >
+                {num + 1}
+              </button>
+            ))}
+
+            <button
+              className="px-3 py-1 bg-[#D1A054] text-white rounded-md disabled:opacity-50"
+              disabled={currentPage === pages}
+              onClick={() => setCurrentPage((p) => Math.min(p + 1, pages))}
+            >
+              Next
+            </button>
           </div>
         </div>
       </div>
