@@ -114,8 +114,14 @@ const AllBooking = () => {
                     <tr
                       key={booking._id}
                       className={`${
-                        index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                      } hover:bg-gray-100 transition-colors duration-150`}
+                        booking.status === "Confirmed"
+                          ? "bg-green-100 text-black"
+                          : booking.status === "canceled"
+                          ? "bg-red-100 text-red-800"
+                          : index % 2 === 0
+                          ? "bg-white"
+                          : "bg-gray-50 hover:bg-gray-100 transition-colors duration-150"
+                      } `}
                     >
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm font-medium text-gray-900">{booking.name}</div>
@@ -140,24 +146,15 @@ const AllBooking = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(booking.status)}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-center">
-                        {booking.status === "confirmed" ? (
-                          <button
-                            disabled
-                            className="text-white px-4 py-2 rounded-lg inline-flex items-center gap-2 opacity-50 cursor-not-allowed bg-gray-400"
-                          >
-                            <FaTrashAlt className="h-3.5 w-3.5" />
-                            Cancel Booking
-                          </button>
-                        ) : (
-                          <button
-                            onClick={() => openDeleteModal(booking._id)}
-                            className="text-white px-4 py-2 rounded-lg transition-all duration-200 inline-flex items-center gap-2 hover:opacity-90 hover:shadow-md"
-                            style={{ backgroundColor: "#D1A054" }}
-                          >
-                            <FaTrashAlt className="h-3.5 w-3.5" />
-                            Cancel Booking
-                          </button>
-                        )}
+                        <button
+                          disabled={booking?.status === "Confirmed" || booking?.status === "canceled"}
+                          onClick={() => openDeleteModal(booking._id)}
+                          className="text-white px-4 py-2 rounded-lg transition-all duration-200 inline-flex items-center gap-2 hover:opacity-90 hover:shadow-md"
+                          style={{ backgroundColor: "#D1A054" }}
+                        >
+                          <FaTrashAlt className="h-3.5 w-3.5" />
+                          Cancel Booking
+                        </button>
                       </td>
                     </tr>
                   ))}

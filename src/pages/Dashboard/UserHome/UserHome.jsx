@@ -26,14 +26,14 @@ const UserHome = () => {
     });
 
     // Fetch payment data
-    const { data: payments = [] } = useQuery({
-        queryKey: ["payments", ],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/payments`);
-            return Array.isArray(res.data) ? res.data : [];
-        },
-        initialData: [],
-    });
+    // const { data: payments = [] } = useQuery({
+    //     queryKey: ["payments", ],
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get(`/payments`);
+    //         return Array.isArray(res.data) ? res.data : [];
+    //     },
+    //     initialData: [],
+    // });
 
 
 
@@ -104,13 +104,13 @@ const UserHome = () => {
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
                     {/* Orders */}
-                    <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center justify-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 border-t-4 border-yellow-600">
+                    {/* <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center justify-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 border-t-4 border-yellow-600">
                         <div className="bg-gradient-to-br from-yellow-100 to-amber-100 p-4 rounded-full mb-4">
                             <FaShoppingCart className="text-4xl text-yellow-700" />
                         </div>
                         <h3 className="text-lg font-semibold text-gray-700">Total Orders</h3>
                         <p className="text-5xl font-bold mt-2 bg-gradient-to-r from-yellow-600 to-amber-600 bg-clip-text text-transparent">{payments?.length || 0}</p>
-                    </div>
+                    </div> */}
 
                     {/* Reviews */}
                     <div className="bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center justify-center hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 border-t-4 border-yellow-600">

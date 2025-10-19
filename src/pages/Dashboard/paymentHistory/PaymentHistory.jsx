@@ -7,7 +7,7 @@ import { useState } from "react";
 const PaymentHistory = () => {
   const axiosSecure = useAxiosSecure();
   const [currentPage, setCurrentPage] = useState(1);
-  const limit = 15; 
+  const limit = 15;
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -67,6 +67,7 @@ const PaymentHistory = () => {
             <table className="table w-full border-collapse">
               <thead className="bg-[#D1A054] text-white text-sm sm:text-base uppercase">
                 <tr>
+                  <th>#</th>
                   <th className="py-4 px-6 text-left">Transaction ID</th>
                   <th className="py-4 px-6 text-center">Total Price</th>
                   <th className="py-4 px-6 text-center">Order Date</th>
@@ -77,11 +78,22 @@ const PaymentHistory = () => {
 
               <tbody>
                 {payments.length > 0 ? (
-                  payments.map((item) => (
+                  payments.map((item, index) => (
                     <tr
                       key={item?._id}
-                      className="border-t border-gray-100 hover:bg-gray-50 transition-all duration-200"
+                      className={`border-t border-gray-100 transition-all duration-200 ${
+                        item?.status === "delivered"
+                          ? "bg-green-100 text-green-800"
+                          : item?.status === "canceled"
+                          ? "bg-red-100 text-red-800"
+                          : index % 2 === 0
+                          ? "bg-white"
+                          : "bg-gray-50"
+                      }`}
                     >
+                      {/* Index */}
+                      <td className="py-3 px-6 text-gray-700 font-medium">{index + 1}</td>
+
                       <td className="py-3 px-6 text-gray-700">{item?.TransactionId || "N/A"}</td>
                       <td className="py-3 px-6 text-center font-semibold text-gray-800">${item?.price || 0}</td>
                       <td className="py-3 px-6 text-center text-gray-600">
@@ -89,7 +101,13 @@ const PaymentHistory = () => {
                       </td>
                       <td
                         className={`py-3 px-6 text-center font-medium ${
-                          item?.status === "pending" ? "text-yellow-500" : "text-green-600"
+                          item?.status === "pending"
+                            ? "text-yellow-500"
+                            : item?.status === "delivered"
+                            ? "text-green-600"
+                            : item?.status === "canceled"
+                            ? "text-red-600"
+                            : ""
                         }`}
                       >
                         {item?.status || "delivered"}
@@ -98,7 +116,7 @@ const PaymentHistory = () => {
                         {item?.status === "canceled" || item?.status === "delivered" ? (
                           <button
                             disabled
-                            className="whitespace-nowrap bg-gray-400 text-white font-semibold px-3 py-2 rounded-lg shadow-md "
+                            className="whitespace-nowrap bg-gray-400 text-white font-semibold px-3 py-2 rounded-lg shadow-md"
                           >
                             Cancel Order
                           </button>
@@ -115,7 +133,7 @@ const PaymentHistory = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="5" className="text-center py-6 text-gray-500 italic">
+                    <td colSpan="6" className="text-center py-6 text-gray-500 italic">
                       No payment history found
                     </td>
                   </tr>
