@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 const axiosOpen=axios.create({
-    baseURL:'http://localhost:3000'
+    baseURL:'https://bistro-nest-server.vercel.app'
 })
 const useAxiosOpen = () => {
   return axiosOpen;
