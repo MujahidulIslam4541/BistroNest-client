@@ -42,7 +42,6 @@ const ManageBookings = () => {
   const handleStatusChange = async (id, newStatus) => {
     try {
       const res = await axiosSecure.patch(`/booking/${id}`, { status: newStatus });
-      console.log(res.data);
       if (res.data) {
         toast.success(`booking status updated to "${newStatus}"`);
         refetch();

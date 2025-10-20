@@ -19,7 +19,6 @@ const UpdateItem = () => {
 
     // Handle form submission
     const onSubmit = async (data) => {
-        console.log("Form data:", data);
 
         // Prepare the image file for upload
         const imageFile = { image: data.image[0] };
@@ -56,8 +55,6 @@ const UpdateItem = () => {
 
                 // console.log("Menu data response:", menuData.data);
             }
-
-            // console.log("Image upload response:", res.data);
         } catch (error) {
 
             toast.error("Something went wrong. Please try again.", error.message);

@@ -3,7 +3,6 @@ import MenuItems from "../../../components/menuItems/MenuItems"
 
 
 const MenuCategory = ({ items, title }) => {
-  console.log(title)
   return (
     <div>
       <div className='grid md:grid-cols-2 gap-8 mx-4 md:mx-0 mt-16'>

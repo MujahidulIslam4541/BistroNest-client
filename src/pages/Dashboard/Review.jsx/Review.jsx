@@ -26,9 +26,9 @@ const Reviews = () => {
             rating: Number(formData.rating),
         };
 
-        console.log(reviewData);
+
         const res = await axiosSecure.post('/reviews', reviewData);
-        console.log("your reviews added successfully",res.data);
+
         
         if (res.data.insertedId) {
             setShowSuccessModal(true);

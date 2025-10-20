@@ -26,7 +26,7 @@ const OurShope = () => {
     // Get menu items from custom hook
     const [drinks, salad, dessert, pizza, soup] = useMenuItem()
 
-    console.log(category)
+
     return (
         <div>
 
